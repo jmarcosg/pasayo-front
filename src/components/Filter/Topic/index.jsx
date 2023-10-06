@@ -14,6 +14,13 @@ const TopicFilter = () => {
     }));
   };
 
+  const handleResetFilters = () => {
+    setSelectedFilter({
+      topic: 'TODOS',
+      author: 'TODAS',
+    });
+  };
+
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary'>
       <div className='container-fluid'>
@@ -64,6 +71,11 @@ const TopicFilter = () => {
             </React.Fragment>
           ))}
         </div>
+
+        <button className='btn btn-warning d-flex gap-2 text-uppercase' type='button' onClick={handleResetFilters}>
+          REINICIAR FILTROS
+          <i className='bi bi-arrow-clockwise' />
+        </button>
 
         <button className='btn btn-warning d-flex gap-2 text-uppercase' type='button'>
           CREAR
