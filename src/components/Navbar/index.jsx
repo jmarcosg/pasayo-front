@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import pasayoLogo from '../../assets/img/PASAYOTEXTO_white.png';
 import { useUserAuth } from '../../context';
 
-const Navbar = () => {
-  const { isAuthenticated, logout, user } = useUserAuth();
+const Navbar = ({ userData }) => {
+  const { logout } = useUserAuth();
 
   return (
     <nav className='navbar navbar-expand-lg bg-warning'>
@@ -16,7 +16,7 @@ const Navbar = () => {
             style={{ maxHeight: '15%', maxWidth: '15%' }}
           />
         </div>
-        {isAuthenticated && (
+        {userData && (
           <>
             <button
               aria-controls='navbarSupportedContent'
@@ -34,7 +34,7 @@ const Navbar = () => {
                 <li className='nav-item'>
                   <Link className='btn btn-danger text-nowrap' role='button' to={'/login'} onClick={logout}>
                     <i className='bi bi-person-circle me-2' />
-                    {user?.username}
+                    {userData?.username}
                   </Link>
                 </li>
               </ul>

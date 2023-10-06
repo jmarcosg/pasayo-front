@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { login, register, verifyToken } from './handlers';
+import { removeSession, setSession } from '../../utils/auth';
 
 export const UserContext = React.createContext();
 
@@ -47,7 +48,9 @@ export const UserWrapper = ({ children }) => {
     try {
       const res = await login(user);
 
+      Cookies.set('token', res.data.token);
       setUser(res.data);
+      setSession(res.data);
       setIsAuthenticated(true);
     } catch (error) {
       console.log(error);
@@ -58,6 +61,7 @@ export const UserWrapper = ({ children }) => {
   const logout = () => {
     Cookies.remove('token');
     setUser(null);
+    removeSession();
     setIsAuthenticated(false);
   };
 

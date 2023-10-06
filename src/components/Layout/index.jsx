@@ -1,21 +1,20 @@
 import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar';
-import { useUserAuth } from '../../context';
+import { getSession, isValidSession } from '../../utils/auth';
 
 const Layout = () => {
-  const { isAuthenticated } = useUserAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isValidSession()) {
       navigate('/login');
     }
   }, []);
 
   return (
     <>
-      <Navbar />
+      <Navbar userData={getSession()} />
       <main className='container'>
         <Outlet />
       </main>

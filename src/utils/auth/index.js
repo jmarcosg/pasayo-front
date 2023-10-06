@@ -13,3 +13,11 @@ export const isValidSession = () => {
 
   return valid;
 };
+
+export const setSession = (sessionData) => {
+  sessionStorage.setItem(KEY, JSON.stringify(sessionData));
+};
+
+export const removeSession = () => {
+  sessionStorage.removeItem(KEY);
+};
