@@ -15,7 +15,7 @@ const Layout = () => {
   return (
     <>
       <Navbar userData={getSession()} />
-      <main className='container'>
+      <main>
         <Outlet />
       </main>
     </>
