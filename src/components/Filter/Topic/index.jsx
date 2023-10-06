@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { topics, authors } from './handlers';
 
 const TopicFilter = () => {
-  const topics = [
-    { name: 'TODOS', value: 'TODOS', checked: true },
-    { name: 'SECUENCIAS', value: 'SECUENCIAS', checked: false },
-    { name: 'MODULARIDAD', value: 'MODULARIDAD', checked: false },
-    { name: 'ALTERNATIVAS', value: 'ALTERNATIVAS', checked: false },
-    { name: 'REPETITIVAS', value: 'REPETITIVAS', checked: false },
-  ];
+  const [selectedFilter, setSelectedFilter] = useState({
+    topic: 'TODOS',
+    author: 'TODAS',
+  });
 
-  const authors = [
-    { name: 'TODAS', value: 'TODAS', checked: true },
-    { name: 'MIAS', value: 'MIAS', checked: false },
-  ];
+  const handleFilterSelection = (filter, type) => {
+    setSelectedFilter((selectedFilter) => ({
+      ...selectedFilter,
+      [type]: filter.value,
+    }));
+  };
 
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary'>
@@ -30,13 +30,15 @@ const TopicFilter = () => {
             <React.Fragment key={i}>
               <input
                 autoComplete='off'
-                checked={topic.checked}
+                checked={selectedFilter.topic === topic.value}
                 className='btn-check'
-                id={topic.id}
-                name='options'
+                id={topic.value}
+                name='btnradio'
                 type='radio'
+                value={topic.value}
+                onChange={() => handleFilterSelection(topic, 'topic')}
               />
-              <label className='btn btn-outline-warning' htmlFor={topic.id}>
+              <label className='btn btn-outline-warning' htmlFor={topic.value}>
                 {topic.name}
               </label>
             </React.Fragment>
@@ -44,17 +46,19 @@ const TopicFilter = () => {
         </div>
 
         <div aria-label='Basic example' className='btn-group' role='group'>
-          {authors.map((author, i) => (
-            <React.Fragment key={i}>
+          {authors.map((author, j) => (
+            <React.Fragment key={j}>
               <input
                 autoComplete='off'
-                checked={author.checked}
+                checked={selectedFilter.author === author.value}
                 className='btn-check'
-                id={author.id}
+                id={author.value}
                 name='options'
                 type='radio'
+                value={author.value}
+                onChange={() => handleFilterSelection(author, 'author')}
               />
-              <label className='btn btn-outline-warning' htmlFor={author.id}>
+              <label className='btn btn-outline-warning' htmlFor={author.value}>
                 {author.name}
               </label>
             </React.Fragment>
