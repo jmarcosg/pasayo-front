@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { topics, authors, getData } from './handlers';
 
 const TopicFilter = () => {
