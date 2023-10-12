@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { topics, authors, getData } from './handlers';
+import ModalCrearExperiencia from './ModalCrearExperiencia';
 
 const TopicFilter = () => {
   const [state, setState] = useState({
@@ -11,6 +12,7 @@ const TopicFilter = () => {
     topic: 'TODOS',
     author: 'TODAS',
   });
+  const [showModalCrearExperiencia, setShowModalCrearExperiencia] = useState(false);
 
   const handleFilterSelection = (filter, type) => {
     setSelectedFilter((selectedFilter) => ({
@@ -25,6 +27,8 @@ const TopicFilter = () => {
       author: 'TODAS',
     });
   };
+
+  const toggleModalSolicitar = () => setShowModalCrearExperiencia(!showModalCrearExperiencia);
 
   useEffect(() => {
     getData(state, setState);
@@ -123,10 +127,20 @@ const TopicFilter = () => {
             <i className='bi bi-arrow-clockwise' />
           </button>
 
-          <button className='btn btn-warning align-items-center d-flex gap-2 text-uppercase' type='button'>
+          <button
+            className='btn btn-warning align-items-center d-flex gap-2 text-uppercase'
+            type='button'
+            onClick={toggleModalSolicitar}
+          >
             <span>CREAR</span>
             <i className='bi bi-plus-square-fill' />
           </button>
+
+          <ModalCrearExperiencia
+            setShowModal={showModalCrearExperiencia}
+            showModal={showModalCrearExperiencia}
+            toggleModal={toggleModalSolicitar}
+          />
         </div>
       </div>
     </nav>

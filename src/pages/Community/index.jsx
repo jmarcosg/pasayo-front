@@ -1,9 +1,9 @@
-import { TopicFilter } from '../../components';
+import { CommunityTopicFilter } from '../../sections';
 
 const Community = () => {
   return (
     <>
-      <TopicFilter />
+      <CommunityTopicFilter />
 
       <div className='container'>
         <h1>Community</h1>
