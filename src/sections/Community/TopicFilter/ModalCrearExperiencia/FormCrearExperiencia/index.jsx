@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getTiposTrayectos, temasExperiencias } from './handlers';
 
-const FormCrearExperiencia = () => {
+const FormCrearExperiencia = ({ setModalTitle, toggleModal }) => {
   const [trayecto, setTrayecto] = useState({
     data: null,
     selected: 'default',
@@ -10,6 +10,8 @@ const FormCrearExperiencia = () => {
   });
 
   useEffect(() => {
+    setModalTitle('Crear Nueva Experiencia');
+
     getTiposTrayectos(trayecto, setTrayecto);
   }, []);
 
@@ -151,7 +153,7 @@ const FormCrearExperiencia = () => {
 
         <div className='row mt-5 px-2'>
           <div className='col d-flex justify-content-end'>
-            <button className='btn btn-danger me-2' type='button'>
+            <button className='btn btn-danger me-2' type='button' onClick={toggleModal}>
               Cancelar
             </button>
             <button className='btn btn-warning' type='submit'>

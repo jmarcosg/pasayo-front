@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Modal } from '../../../../components';
 import FormCrearExperiencia from './FormCrearExperiencia';
+import FormCrearTrayecto from './FormCrearTrayecto';
 
 const ModalCrearExperiencia = ({ showModal, toggleModal }) => {
   const [selectedForm, setSelectedForm] = useState(''); // experiencia | trayecto
+  let [modalTitle, setModalTitle] = useState('');
   const [trayecto, setTrayecto] = useState({
     listado: null,
     selected: 'default',
@@ -17,7 +19,12 @@ const ModalCrearExperiencia = ({ showModal, toggleModal }) => {
   };
 
   return (
-    <Modal setShow={toggleModal} show={showModal} size={'lg'} title={() => 'Crear Nueva Experiencia o Trayecto'}>
+    <Modal
+      setShow={toggleModal}
+      show={showModal}
+      size={'lg'}
+      title={() => (modalTitle ? modalTitle : 'Seleccione una opción a crear')}
+    >
       <div className='row d-flex justify-content-center'>
         <div aria-label='Basic example' className='btn-group' role='group'>
           <button
@@ -40,7 +47,11 @@ const ModalCrearExperiencia = ({ showModal, toggleModal }) => {
           <hr />
         </div>
 
-        {selectedForm === 'experiencia' && <FormCrearExperiencia />}
+        {selectedForm === 'experiencia' && (
+          <FormCrearExperiencia setModalTitle={setModalTitle} toggleModal={toggleModal} />
+        )}
+
+        {selectedForm === 'trayecto' && <FormCrearTrayecto setModalTitle={setModalTitle} toggleModal={toggleModal} />}
       </div>
     </Modal>
   );
