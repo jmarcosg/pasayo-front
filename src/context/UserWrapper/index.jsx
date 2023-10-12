@@ -78,7 +78,6 @@ export const UserWrapper = ({ children }) => {
 
       try {
         const res = await verifyToken(cookies.token);
-        console.log(res);
 
         if (!res.data) return setIsAuthenticated(false);
 
