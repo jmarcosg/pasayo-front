@@ -13,7 +13,7 @@ const Navbar = ({ userData }) => {
             alt='Logo'
             className='d-inline-block align-text-top user-select-none'
             src={pasayoLogo}
-            style={{ maxHeight: '15%', maxWidth: '15%' }}
+            style={{ maxHeight: '10%', maxWidth: '10%' }}
           />
         </div>
         {userData && (
