@@ -7,7 +7,7 @@ const Navbar = ({ userData }) => {
 
   return (
     <nav className='navbar navbar-expand-lg bg-warning'>
-      <div className='container-fluid'>
+      <div className='container-fluid d-flex justify-content-between'>
         <div className='navbar-brand'>
           <img
             alt='Logo'
