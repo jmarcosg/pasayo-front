@@ -1,3 +1,5 @@
+import { axios } from '../../../utils/axios';
+
 export const topics = [
   { name: 'TODOS', value: 'TODOS' },
   { name: 'SECUENCIAS', value: 'SECUENCIAS' },
@@ -11,15 +13,16 @@ export const authors = [
   { name: 'MIAS', value: 'MIAS' },
 ];
 
-export const getData = async (state, setState) => {
+export const getFilteredExperiencias = async (experiences, setExperiences, selectedFilter) => {
   try {
-    setState((state) => ({ ...state, loading: true }));
+    setExperiences({ ...experiences, loading: true });
 
-    const response = await fetch('https://jsonplaceholder.typicode.com/users');
-    const data = await response.json();
+    const { data } = await axios.get(
+      `/experiencias?tema=${selectedFilter.topic}&autor=${selectedFilter.author}&titulo=&limite=10`
+    );
 
-    setState((state) => ({ ...state, data, loading: false }));
+    setExperiences({ ...experiences, data, loading: false });
   } catch (error) {
-    setState((state) => ({ ...state, error, loading: false }));
+    setExperiences({ ...experiences, error, loading: false });
   }
 };

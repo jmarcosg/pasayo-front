@@ -17,7 +17,7 @@ const Community = () => {
 
   return (
     <>
-      <CommunityTopicFilter />
+      <CommunityTopicFilter experiences={experiences} setExperiences={setExperiences} />
 
       <div className='container mt-4'>
         {experiences.loading && (

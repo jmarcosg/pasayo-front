@@ -1,13 +1,8 @@
-import { useEffect, useState } from 'react';
-import { topics, authors, getData } from './handlers';
+import { useState } from 'react';
+import { topics, authors, getFilteredExperiencias } from './handlers';
 import ModalCrearExperiencia from './ModalCrearExperiencia';
 
-const TopicFilter = () => {
-  const [state, setState] = useState({
-    data: null,
-    loading: false,
-    error: null,
-  });
+const TopicFilter = ({ experiences, setExperiences }) => {
   const [selectedFilter, setSelectedFilter] = useState({
     topic: 'TODOS',
     author: 'TODAS',
@@ -29,10 +24,6 @@ const TopicFilter = () => {
   };
 
   const toggleModalSolicitar = () => setShowModalCrearExperiencia(!showModalCrearExperiencia);
-
-  useEffect(() => {
-    getData(state, setState);
-  }, []);
 
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary'>
@@ -115,7 +106,10 @@ const TopicFilter = () => {
               </ul>
             </div>
 
-            <button className='btn btn-warning'>
+            <button
+              className='btn btn-warning'
+              onClick={() => getFilteredExperiencias(experiences, setExperiences, selectedFilter)}
+            >
               <i className='bi bi-search' />
             </button>
           </div>
