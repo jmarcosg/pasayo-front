@@ -6,6 +6,7 @@ const TopicFilter = ({ experiences, setExperiences }) => {
   const [selectedFilter, setSelectedFilter] = useState({
     topic: 'TODOS',
     author: 'TODAS',
+    title: '',
   });
   const [showModalCrearExperiencia, setShowModalCrearExperiencia] = useState(false);
 
@@ -42,7 +43,13 @@ const TopicFilter = ({ experiences, setExperiences }) => {
 
         <div className='collapse navbar-collapse d-flex gap-2 justify-content-center' id='navbarSupportedContent'>
           <form className='d-flex gap-2'>
-            <input aria-label='Search' className='form-control ms-2' placeholder='Título' type='search' />
+            <input
+              aria-label='Search'
+              className='form-control ms-2'
+              placeholder='Título'
+              type='search'
+              onChange={(e) => handleFilterSelection(e.target, 'title')}
+            />
           </form>
 
           <div className='btn-group' role='group'>

@@ -18,7 +18,7 @@ export const getFilteredExperiencias = async (experiences, setExperiences, selec
     setExperiences({ ...experiences, loading: true });
 
     const { data } = await axios.get(
-      `/experiencias?tema=${selectedFilter.topic}&autor=${selectedFilter.author}&titulo=&limite=10`
+      `/experiencias?tema=${selectedFilter.topic}&autor=${selectedFilter.author}&titulo=${selectedFilter.title}&limite=10`
     );
 
     setExperiences({ ...experiences, data, loading: false });
