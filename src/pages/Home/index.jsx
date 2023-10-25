@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
-import { CommunityTopicFilter } from '../../sections';
 import { ExperienceCard } from '../../components';
+import TopicFilter from './TopicFilter';
 import { getExperiencias } from './handlers';
 
-const Community = () => {
+const Home = () => {
   const [experiences, setExperiences] = useState({
     data: null,
     loading: false,
@@ -17,7 +17,7 @@ const Community = () => {
 
   return (
     <>
-      <CommunityTopicFilter experiences={experiences} setExperiences={setExperiences} />
+      <TopicFilter experiences={experiences} setExperiences={setExperiences} />
 
       <div className='container mt-4'>
         {experiences.loading && (
@@ -48,4 +48,4 @@ const Community = () => {
   );
 };
 
-export default Community;
+export default Home;
