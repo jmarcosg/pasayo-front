@@ -1,7 +1,12 @@
+import { useState } from 'react';
 import { getSession } from '../../../utils/auth';
+import ModalBorrarExperiencia from './ModalBorrarExperiencia';
 
 const ExperiencieCard = ({ data }) => {
   const { username } = getSession();
+  const [showModalBorrarExperiencia, setShowModalBorrarExperiencia] = useState(false);
+
+  const toggleModalBorrar = () => setShowModalBorrarExperiencia(!showModalBorrarExperiencia);
 
   return (
     <div className='card' style={{ minWidth: '18rem', maxWidth: '100%' }}>
@@ -29,7 +34,7 @@ const ExperiencieCard = ({ data }) => {
             <button className='btn btn-warning rounded-0' type='button'>
               <i className='bi bi-eye' />
             </button>
-            <button className='btn btn-danger rounded-0' type='button'>
+            <button className='btn btn-danger rounded-0' type='button' onClick={toggleModalBorrar}>
               <i className='bi bi-trash' />
             </button>
           </div>
@@ -62,6 +67,13 @@ const ExperiencieCard = ({ data }) => {
           {data?.user}
         </span>
       </div>
+
+      <ModalBorrarExperiencia
+        data={data}
+        setShowModal={setShowModalBorrarExperiencia}
+        showModal={showModalBorrarExperiencia}
+        toggleModal={toggleModalBorrar}
+      />
     </div>
   );
 };
