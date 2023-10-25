@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { topics, authors, getFilteredExperiencias } from './handlers';
 import ModalCrearExperiencia from './ModalCrearExperiencia';
 
-const TopicFilter = ({ experiences, setExperiences }) => {
+const TopicFilter = ({ experiences, getExperiencias, setExperiences }) => {
   const [selectedFilter, setSelectedFilter] = useState({
     topic: 'TODOS',
     author: 'TODAS',
@@ -21,7 +21,9 @@ const TopicFilter = ({ experiences, setExperiences }) => {
     setSelectedFilter({
       topic: 'TODOS',
       author: 'TODAS',
+      title: '',
     });
+    getExperiencias(experiences, setExperiences);
   };
 
   const toggleModalSolicitar = () => setShowModalCrearExperiencia(!showModalCrearExperiencia);
@@ -48,6 +50,7 @@ const TopicFilter = ({ experiences, setExperiences }) => {
               className='form-control ms-2'
               placeholder='Título'
               type='search'
+              value={selectedFilter.title}
               onChange={(e) => handleFilterSelection(e.target, 'title')}
             />
           </form>

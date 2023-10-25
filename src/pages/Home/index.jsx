@@ -17,7 +17,7 @@ const Home = () => {
 
   return (
     <>
-      <TopicFilter experiences={experiences} setExperiences={setExperiences} />
+      <TopicFilter experiences={experiences} getExperiencias={getExperiencias} setExperiences={setExperiences} />
 
       <div className='container mt-4'>
         {experiences.loading && (
