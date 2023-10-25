@@ -34,7 +34,7 @@ const ModalBorrarExperiencia = ({ data, showModal, toggleModal }) => {
           <button className='btn btn-secondary me-2' type='button' onClick={toggleModal}>
             Cancelar
           </button>
-          <button className='btn btn-danger' type='submit'>
+          <button className='btn btn-danger' type='button'>
             Borrar
           </button>
         </div>
