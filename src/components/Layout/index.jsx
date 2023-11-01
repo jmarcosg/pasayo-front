@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar';
 import { getSession, isValidSession } from '../../utils/auth';
+import Toast from '../Toast';
 
 const Layout = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Layout = () => {
       <Navbar userData={getSession()} />
       <main>
         <Outlet />
+        <Toast />
       </main>
     </>
   );
