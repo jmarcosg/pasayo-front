@@ -116,7 +116,7 @@ const FormCrearTrayecto = ({ setModalTitle, toggleModal }) => {
             </label>
             <div className='form-floating'>
               <select
-                aria-label='Select tema trayecto'
+                aria-label='Selección Tema Trayecto'
                 className='form-select'
                 defaultValue={'default'}
                 disabled={trayecto.loading}

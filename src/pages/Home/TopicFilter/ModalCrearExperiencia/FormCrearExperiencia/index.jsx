@@ -20,18 +20,32 @@ const FormCrearExperiencia = ({ setModalTitle, toggleModal }) => {
       <span>Si esta Experiencia pertenece a un Trayecto, por favor, seleccionalo</span>
 
       <form className='mt-2 px-4'>
-        <div className='row d-flex justify-content-center'>
-          <select aria-label='Selección Trayecto' className='form-select' defaultValue={'default'}>
-            <option disabled placeholder='Seleccioná un trayecto' value={'default'}>
-              Seleccioná un trayecto
-            </option>
-            {trayecto.data &&
-              trayecto.data.map((trayecto) => (
-                <option key={trayecto._id} value={trayecto._id}>
-                  {trayecto.titulo}
-                </option>
-              ))}
-          </select>
+        <div className='row mt-2'>
+          <div className='mb-2'>
+            <label className='form-label fw-bold' htmlFor='trayecto' id='label-trayecto'>
+              Trayecto
+            </label>
+            <div className='form-floating'>
+              <select
+                aria-label='Selección Trayecto'
+                className='form-select'
+                defaultValue={'default'}
+                id='trayecto'
+                name='trayecto'
+              >
+                <option disabled placeholder='Seleccioná un trayecto' value={'default'} />
+                {trayecto.data &&
+                  trayecto.data.map((trayecto) => (
+                    <option key={trayecto._id} value={trayecto._id}>
+                      {trayecto.titulo}
+                    </option>
+                  ))}
+              </select>
+              <label className='form-label fw-bold' htmlFor='trayecto'>
+                Seleccioná un trayecto
+              </label>
+            </div>
+          </div>
         </div>
 
         <div className='row mt-2 px-4'>
