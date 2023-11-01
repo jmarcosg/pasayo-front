@@ -12,8 +12,11 @@ const Toast = () => {
         // Define default options
         className: '',
         duration: 5000,
+        style: {
+          boxShadow: '-4px 4px 4px rgba(0, 0, 0, .2)',
+        },
 
-        // Options for specific types
+        // Default options for specific types
         success: {
           duration: 3000,
           theme: {
