@@ -1,13 +1,38 @@
 import { useEffect, useState } from 'react';
-import { getTiposTrayectos, temasExperiencias } from './handlers';
+import { getTiposTrayectos, handlerSendData, temasExperiencias, validateData } from './handlers';
+import { getSession } from '../../../../../utils/auth';
 
 const FormCrearExperiencia = ({ setModalTitle, toggleModal }) => {
+  const { username } = getSession();
   const [trayecto, setTrayecto] = useState({
     data: null,
     selected: 'default',
     loading: false,
     error: null,
   });
+  const [experiencia, setExperiencia] = useState({
+    body: {
+      titulo: '',
+      narrativa: '',
+      objetivo: '',
+      tema: '',
+      id_trayecto: '',
+      solucion: '',
+      user: username,
+    },
+    loading: false,
+    error: null,
+  });
+
+  const handleBodyChange = (e) => {
+    setExperiencia({ ...experiencia, body: { ...experiencia.body, [e.target.name]: e.target.value } });
+  };
+
+  const sendData = () => {
+    if (validateData(experiencia.body)) {
+      handlerSendData(experiencia, setExperiencia);
+    }
+  };
 
   useEffect(() => {
     setModalTitle('Crear Nueva Experiencia');
@@ -22,7 +47,7 @@ const FormCrearExperiencia = ({ setModalTitle, toggleModal }) => {
       <form className='mt-2 px-4'>
         <div className='row mt-2'>
           <div className='mb-2'>
-            <label className='form-label fw-bold' htmlFor='trayecto' id='label-trayecto'>
+            <label className='form-label fw-bold' htmlFor='label-trayecto' id='label-trayecto'>
               Trayecto
             </label>
             <div className='form-floating'>
@@ -30,10 +55,12 @@ const FormCrearExperiencia = ({ setModalTitle, toggleModal }) => {
                 aria-label='Selección Trayecto'
                 className='form-select'
                 defaultValue={'default'}
+                disabled={trayecto.loading || experiencia.loading}
                 id='trayecto'
                 name='trayecto'
+                onChange={handleBodyChange}
               >
-                <option disabled placeholder='Seleccioná un trayecto' value={'default'} />
+                <option disabled value={'default'} />
                 {trayecto.data &&
                   trayecto.data.map((trayecto) => (
                     <option key={trayecto._id} value={trayecto._id}>
@@ -41,7 +68,7 @@ const FormCrearExperiencia = ({ setModalTitle, toggleModal }) => {
                     </option>
                   ))}
               </select>
-              <label className='form-label fw-bold' htmlFor='trayecto'>
+              <label className='form-label fw-bold' htmlFor='label-trayecto' id='label-trayecto'>
                 Seleccioná un trayecto
               </label>
             </div>
@@ -56,7 +83,7 @@ const FormCrearExperiencia = ({ setModalTitle, toggleModal }) => {
             </h4>
             <p className='mb-0'>
               Los <span className='fw-bold'>Trayectos</span> agrupan Experiencias didácticamente relacionadas entre sí.
-              Podés agrupar esta Experiencia en un <span className='fw-bold'>Trayecto</span> ya existente o bien podés
+              Podés agrupar esta Experiencia en un <span className='fw-bold'>Trayecto</span> ya existente, o bien podés
               crear uno nuevo.
             </p>
           </div>
@@ -64,17 +91,19 @@ const FormCrearExperiencia = ({ setModalTitle, toggleModal }) => {
 
         <div className='row mt-2'>
           <div className='mb-3'>
-            <label className='form-label fw-bold' htmlFor='titulo'>
+            <label className='form-label fw-bold' htmlFor='label-titulo' id='label-titulo'>
               Título
             </label>
             <div className='input-group'>
               <input
                 aria-describedby='input-titulo form-exp'
                 className='form-control'
+                disabled={experiencia.loading}
                 id='titulo'
                 name='titulo'
                 placeholder='Ingresá un Título'
                 type='text'
+                onChange={handleBodyChange}
               />
             </div>
             <div className='form-text' id='input-titulo'>
@@ -85,18 +114,21 @@ const FormCrearExperiencia = ({ setModalTitle, toggleModal }) => {
 
         <div className='row mt-2'>
           <div className='mb-3'>
-            <label className='form-label fw-bold' htmlFor='narrativa'>
+            <label className='form-label fw-bold' htmlFor='label-narrativa' id='label-narrativa'>
               Narrativa
             </label>
             <div className='form-floating'>
               <textarea
                 className='form-control'
+                disabled={experiencia.loading}
                 id='narrativa'
+                name='narrativa'
                 placeholder='Ingresá una narrativa para esta experiencia'
                 rows={3}
                 style={{ height: '100px' }}
+                onChange={handleBodyChange}
               />
-              <label className='text-body-secondary' htmlFor='narrativa'>
+              <label className='text-body-secondary' htmlFor='label-narrativa'>
                 Ingresá una narrativa para esta experiencia
               </label>
             </div>
@@ -108,18 +140,21 @@ const FormCrearExperiencia = ({ setModalTitle, toggleModal }) => {
 
         <div className='row mt-2'>
           <div className='mb-3'>
-            <label className='form-label fw-bold' htmlFor='plantilla'>
+            <label className='form-label fw-bold' htmlFor='label-solucion' id='label-solucion'>
               Plantilla
             </label>
             <div className='form-floating'>
               <textarea
                 className='form-control'
-                id='plantilla'
+                disabled={experiencia.loading}
+                id='solucion'
+                name='solucion'
                 placeholder='Ingresá una plantilla para esta experiencia'
                 rows={3}
                 style={{ height: '100px' }}
+                onChange={handleBodyChange}
               />
-              <label className='text-body-secondary' htmlFor='plantilla'>
+              <label className='text-body-secondary' htmlFor='label-solucion'>
                 Ingresá una plantilla para esta experiencia
               </label>
             </div>
@@ -131,18 +166,21 @@ const FormCrearExperiencia = ({ setModalTitle, toggleModal }) => {
 
         <div className='row mt-2'>
           <div className='mb-3'>
-            <label className='form-label fw-bold' htmlFor='objetivo-didactico'>
+            <label className='form-label fw-bold' htmlFor='label-objetivo' id='label-objetivo'>
               Objetivo Didáctico
             </label>
             <div className='form-floating'>
               <textarea
                 className='form-control'
-                id='objetivo-didactico'
+                disabled={experiencia.loading}
+                id='objetivo'
+                name='objetivo'
                 placeholder='Ingresá un objetivo didáctico para esta experiencia'
                 rows={3}
                 style={{ height: '100px' }}
+                onChange={handleBodyChange}
               />
-              <label className='text-body-secondary' htmlFor='plantilla'>
+              <label className='text-body-secondary' htmlFor='label-objetivo' id='label-objetivo'>
                 Ingresá un objetivo didáctico para esta experiencia
               </label>
             </div>
@@ -152,25 +190,39 @@ const FormCrearExperiencia = ({ setModalTitle, toggleModal }) => {
           </div>
         </div>
 
-        <div className='row mt-2 px-3'>
-          <select aria-label='Select tema experiencia' className='form-select' defaultValue={'default'}>
-            <option disabled placeholder='Indicá el tema de tu experiencia' value={'default'}>
-              Indicá el tema de tu experiencia
-            </option>
-            {temasExperiencias.map((tema) => (
-              <option key={tema.value} value={tema.value}>
-                {tema.name}
-              </option>
-            ))}
-          </select>
+        <div className='row mt-2'>
+          <div className='mb-2'>
+            <label className='form-label fw-bold' htmlFor='tema' id='label-tema'>
+              Tema
+            </label>
+            <div className='form-floating'>
+              <select
+                aria-label='Select tema experiencia'
+                className='form-select'
+                defaultValue={'default'}
+                disabled={experiencia.loading}
+                onChange={handleBodyChange}
+              >
+                <option disabled value={'default'} />
+                {temasExperiencias.map((tema) => (
+                  <option key={tema.value} value={tema.value}>
+                    {tema.name}
+                  </option>
+                ))}
+              </select>
+              <label className='form-label fw-bold' htmlFor='label-tema' id='label-tema'>
+                Indicá el tema de tu experiencia
+              </label>
+            </div>
+          </div>
         </div>
 
         <div className='row mt-5 px-2'>
           <div className='col d-flex justify-content-end'>
-            <button className='btn btn-danger me-2' type='button' onClick={toggleModal}>
+            <button className='btn btn-danger me-2' disabled={experiencia.loading} type='button' onClick={toggleModal}>
               Cancelar
             </button>
-            <button className='btn btn-warning' type='submit'>
+            <button className='btn btn-warning' disabled={experiencia.loading} type='button' onClick={sendData}>
               Crear
             </button>
           </div>
