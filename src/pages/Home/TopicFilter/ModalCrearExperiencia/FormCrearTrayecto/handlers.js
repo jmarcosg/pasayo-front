@@ -1,4 +1,11 @@
+import { toast } from 'react-hot-toast';
 import { axios } from '../../../../../utils/axios';
+import {
+  addIsInvalidClass,
+  addIsValidClass,
+  removeIsInvalidClass,
+  removeIsValidClass,
+} from '../../../../../utils/validations';
 
 export const temasTrayectos = [
   { name: 'SECUENCIAS', value: 'SECUENCIAS' },
@@ -7,16 +14,76 @@ export const temasTrayectos = [
   { name: 'REPETITIVAS', value: 'REPETITIVAS' },
 ];
 
-export const createTrayecto = async (trayecto, setTrayecto) => {
-  try {
-    setTrayecto({ ...trayecto, loading: true });
+export const removeInvalidClasses = (field) => {
+  const remInvalid = removeIsInvalidClass;
 
-    // const { data } = await axios.post(`/trayecto`, trayecto.body);
+  if (field === 'titulo') remInvalid(['#label-titulo', '#titulo']);
+  if (field === 'narrativa') remInvalid(['#label-narrativa', '#narrativa']);
+  if (field === 'objetivo') remInvalid(['#label-objetivo', '#objetivo']);
+  if (field === 'tema') remInvalid(['#label-tema', '#tema']);
+};
 
-    setTrayecto({ ...trayecto, loading: false });
-    // setTrayecto({ ...trayecto, data, loading: false });
-  } catch (error) {
-    // setTrayecto({ ...trayecto, error, loading: false });
-    setTrayecto({ ...trayecto, error, loading: false });
+export const removeValidClasses = (field) => {
+  const remValid = removeIsValidClass;
+
+  if (field === 'titulo') remValid(['#label-titulo', '#titulo']);
+  if (field === 'narrativa') remValid(['#label-narrativa', '#narrativa']);
+  if (field === 'objetivo') remValid(['#label-objetivo', '#objetivo']);
+  if (field === 'tema') remValid(['#label-tema', '#tema']);
+};
+
+/** deshabilita el envio de informacion y muestra los errores */
+export const validateData = (trayectoBody) => {
+  let validData = true;
+
+  const messages = [];
+
+  if (trayectoBody.titulo === '') {
+    addIsInvalidClass(['#label-titulo', '#titulo']);
+    messages.push('Debe ingresar el titulo');
+    validData = false;
+  } else {
+    addIsValidClass(['#label-titulo', '#titulo']);
   }
+
+  if (trayectoBody.narrativa === '') {
+    addIsInvalidClass(['#label-narrativa', '#narrativa']);
+    messages.push('Debe ingresar la narrativa');
+    validData = false;
+  } else {
+    addIsValidClass(['#label-narrativa', '#narrativa']);
+  }
+
+  if (trayectoBody.objetivo === '') {
+    addIsInvalidClass(['#label-objetivo', '#objetivo']);
+    messages.push('Debe ingresar el objetivo');
+    validData = false;
+  } else {
+    addIsValidClass(['#label-objetivo', '#objetivo']);
+  }
+
+  if (trayectoBody.tema === '') {
+    addIsInvalidClass(['#label-tema', '#tema']);
+    messages.push('Debe ingresar el tema');
+    validData = false;
+  } else {
+    addIsValidClass(['#label-tema', '#tema']);
+  }
+
+  /* Mostramos los mensajes */
+  messages.forEach((msg) => toast.error(msg));
+
+  return validData;
+};
+
+export const handlerSendData = (trayecto, setTrayecto) => {
+  setTrayecto({ ...trayecto, loading: true });
+
+  toast.promise(axios.post(`/trayecto`, trayecto.body), {
+    loading: 'Creando...',
+    success: '¡Trayecto creado correctamente!',
+    error: 'Ocurrio un error al crear el trayecto.',
+  });
+
+  setTrayecto({ ...trayecto, loading: false });
 };

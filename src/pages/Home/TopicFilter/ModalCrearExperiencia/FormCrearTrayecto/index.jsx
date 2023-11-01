@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
-import { createTrayecto, temasTrayectos } from './handlers';
+import { handlerSendData, temasTrayectos, validateData } from './handlers';
+import { getSession } from '../../../../../utils/auth';
 
 const FormCrearTrayecto = ({ setModalTitle, toggleModal }) => {
+  const { username } = getSession();
   const [trayecto, setTrayecto] = useState({
     body: {
       titulo: '',
       narrativa: '',
       objetivo: '',
       tema: '',
+      user: username,
     },
     loading: false,
     error: null,
@@ -17,22 +20,29 @@ const FormCrearTrayecto = ({ setModalTitle, toggleModal }) => {
     setTrayecto({ ...trayecto, body: { ...trayecto.body, [e.target.name]: e.target.value } });
   };
 
+  const sendData = () => {
+    if (validateData(trayecto.body)) {
+      handlerSendData(trayecto, setTrayecto);
+    }
+  };
+
   useEffect(() => {
     setModalTitle('Crear Nuevo Trayecto');
   }, []);
 
   return (
     <>
-      <form className='mt-2 px-4' onSubmit={createTrayecto(trayecto, setTrayecto)}>
+      <form className='mt-2 px-4'>
         <div className='row mt-2'>
           <div className='mb-3'>
-            <label className='form-label fw-bold' htmlFor='titulo'>
+            <label className='form-label fw-bold' htmlFor='titulo' id='label-titulo'>
               Título
             </label>
             <div className='input-group'>
               <input
                 aria-describedby='input-titulo form-exp'
                 className='form-control'
+                disabled={trayecto.loading}
                 id='titulo'
                 name='titulo'
                 placeholder='Ingresá un Título'
@@ -48,12 +58,13 @@ const FormCrearTrayecto = ({ setModalTitle, toggleModal }) => {
 
         <div className='row mt-2'>
           <div className='mb-3'>
-            <label className='form-label fw-bold' htmlFor='narrativa'>
+            <label className='form-label fw-bold' htmlFor='narrativa' id='label-narrativa'>
               Narrativa
             </label>
             <div className='form-floating'>
               <textarea
                 className='form-control'
+                disabled={trayecto.loading}
                 id='narrativa'
                 name='narrativa'
                 placeholder='Ingresá una narrativa para esta experiencia'
@@ -74,12 +85,13 @@ const FormCrearTrayecto = ({ setModalTitle, toggleModal }) => {
 
         <div className='row mt-2'>
           <div className='mb-3'>
-            <label className='form-label fw-bold' htmlFor='objetivo'>
+            <label className='form-label fw-bold' htmlFor='objetivo' id='label-objetivo'>
               Objetivo Didáctico
             </label>
             <div className='form-floating'>
               <textarea
                 className='form-control'
+                disabled={trayecto.loading}
                 id='objetivo'
                 name='objetivo'
                 placeholder='Ingresá un objetivo didáctico para este trayecto'
@@ -99,26 +111,28 @@ const FormCrearTrayecto = ({ setModalTitle, toggleModal }) => {
 
         <div className='row mt-2'>
           <div className='mb-3'>
+            <label className='form-label fw-bold' htmlFor='tema' id='label-tema'>
+              Tema
+            </label>
             <div className='form-floating'>
               <select
                 aria-label='Select tema trayecto'
                 className='form-select'
                 defaultValue={'default'}
+                disabled={trayecto.loading}
                 id='tema'
                 name='tema'
                 onChange={handleBodyChange}
               >
-                <option disabled placeholder='Indicá el tema de tu trayecto' value={'default'}>
-                  Indicá el tema de tu trayecto
-                </option>
+                <option disabled value='default' />
                 {temasTrayectos.map((tema) => (
                   <option key={tema.value} value={tema.value}>
                     {tema.name}
                   </option>
                 ))}
               </select>
-              <label className='form-label fw-bold text-dark' htmlFor='tema'>
-                Tema
+              <label className='form-label fw-bold' htmlFor='tema'>
+                Indicá el tema de tu trayecto
               </label>
             </div>
           </div>
@@ -126,10 +140,10 @@ const FormCrearTrayecto = ({ setModalTitle, toggleModal }) => {
 
         <div className='row mt-5 px-2'>
           <div className='col d-flex justify-content-end'>
-            <button className='btn btn-danger me-2' type='button' onClick={toggleModal}>
+            <button className='btn btn-danger me-2' disabled={trayecto.loading} type='button' onClick={toggleModal}>
               Cancelar
             </button>
-            <button className='btn btn-warning' type='submit'>
+            <button className='btn btn-warning' disabled={trayecto.loading} type='button' onClick={sendData}>
               Crear
             </button>
           </div>
