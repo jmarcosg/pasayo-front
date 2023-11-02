@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { getSession } from '../../../utils/auth';
 import ModalBorrarExperiencia from './ModalBorrarExperiencia';
+import { Link } from 'react-router-dom';
 
 const ExperiencieCard = ({ data }) => {
   const { username } = getSession();
@@ -22,40 +23,28 @@ const ExperiencieCard = ({ data }) => {
           <span className='fw-bold'>Tema:</span> {data?.tema}
         </li>
       </ul>
-      {data?.user === username && (
-        <div className='d-grid gap-3'>
-          <div aria-label='Acciones Experiencia' className='btn-group' role='group'>
-            <button className='btn btn-warning rounded-0' type='button'>
-              <i className='bi bi-puzzle' />
-            </button>
+
+      <div className='d-grid gap-3'>
+        <div aria-label='Acciones Experiencia' className='btn-group' role='group'>
+          <button className='btn btn-warning rounded-0' type='button'>
+            <i className='bi bi-puzzle' />
+          </button>
+          <Link to={'/texto'}>
             <button className='btn btn-warning rounded-0' type='button'>
               <i className='bi bi-code-square' />
             </button>
-            <button className='btn btn-warning rounded-0' type='button'>
-              <i className='bi bi-eye' />
-            </button>
+          </Link>
+
+          <button className='btn btn-warning rounded-0' type='button'>
+            <i className='bi bi-eye' />
+          </button>
+          {data?.user === username && (
             <button className='btn btn-danger rounded-0' type='button' onClick={toggleModalBorrar}>
               <i className='bi bi-trash' />
             </button>
-          </div>
+          )}
         </div>
-      )}
-
-      {data?.user !== username && (
-        <div className='d-grid gap-3'>
-          <div aria-label='Acciones Experiencia' className='btn-group' role='group'>
-            <button className='btn btn-warning rounded-0' type='button'>
-              <i className='bi bi-puzzle' />
-            </button>
-            <button className='btn btn-warning rounded-0' type='button'>
-              <i className='bi bi-code-square' />
-            </button>
-            <button className='btn btn-warning rounded-0' type='button'>
-              <i className='bi bi-eye' />
-            </button>
-          </div>
-        </div>
-      )}
+      </div>
 
       <div className='card-body text-bg-light d-flex justify-content-end gap-2'>
         <span className='badge text-bg-secondary d-flex gap-1'>
