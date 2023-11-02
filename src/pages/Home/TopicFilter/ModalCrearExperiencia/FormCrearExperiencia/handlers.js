@@ -29,7 +29,7 @@ export const temasExperiencias = [
 export const removeInvalidClasses = (field) => {
   const remInvalid = removeIsInvalidClass;
 
-  if (field === 'trayecto') remInvalid(['#label-trayecto', '#trayecto']);
+  if (field === 'id_trayecto') remInvalid(['#label-id_trayecto', '#id_trayecto']);
   if (field === 'titulo') remInvalid(['#label-titulo', '#titulo']);
   if (field === 'narrativa') remInvalid(['#label-narrativa', '#narrativa']);
   if (field === 'solucion') remInvalid(['#label-solucion', '#solucion']);
@@ -40,7 +40,7 @@ export const removeInvalidClasses = (field) => {
 export const removeValidClasses = (field) => {
   const remValid = removeIsValidClass;
 
-  if (field === 'trayecto') remValid(['#label-trayecto', '#trayecto']);
+  if (field === 'id_trayecto') remValid(['#label-id_trayecto', '#id_trayecto']);
   if (field === 'titulo') remValid(['#label-titulo', '#titulo']);
   if (field === 'narrativa') remValid(['#label-narrativa', '#narrativa']);
   if (field === 'solucion') remValid(['#label-solucion', '#solucion']);
@@ -55,11 +55,11 @@ export const validateData = (experienciaBody) => {
   const messages = [];
 
   if (experienciaBody.id_trayecto === '') {
-    addIsInvalidClass(['#label-trayecto', '#trayecto']);
+    addIsInvalidClass(['#label-id_trayecto', '#id_trayecto']);
     messages.push('Debe seleccionar un trayecto');
     validData = false;
   } else {
-    addIsValidClass(['#label-trayecto', '#trayecto']);
+    addIsValidClass(['#label-id_trayecto', '#id_trayecto']);
   }
 
   if (experienciaBody.titulo === '') {
@@ -114,7 +114,7 @@ export const handlerSendData = (experiencia, setExperiencia) => {
   toast.promise(axios.post(`/experiencia`, experiencia.body), {
     loading: 'Creando...',
     success: '¡Experiencia creada correctamente!',
-    error: 'Ocurrio un error al crear el trayecto.',
+    error: 'Ocurrio un error al crear la experiencia.',
   });
 
   setExperiencia({ ...experiencia, loading: false });

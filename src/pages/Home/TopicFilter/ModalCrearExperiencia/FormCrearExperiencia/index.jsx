@@ -47,7 +47,7 @@ const FormCrearExperiencia = ({ setModalTitle, toggleModal }) => {
       <form className='mt-2 px-4'>
         <div className='row mt-2'>
           <div className='mb-2'>
-            <label className='form-label fw-bold' htmlFor='trayecto' id='label-trayecto'>
+            <label className='form-label fw-bold' htmlFor='id_trayecto' id='label-id_trayecto'>
               Trayecto
             </label>
             <div className='form-floating'>
@@ -56,8 +56,8 @@ const FormCrearExperiencia = ({ setModalTitle, toggleModal }) => {
                 className='form-select'
                 defaultValue={'default'}
                 disabled={trayecto.loading || experiencia.loading}
-                id='trayecto'
-                name='trayecto'
+                id='id_trayecto'
+                name='id_trayecto'
                 onChange={handleBodyChange}
               >
                 <option disabled value={'default'} />
@@ -68,7 +68,7 @@ const FormCrearExperiencia = ({ setModalTitle, toggleModal }) => {
                     </option>
                   ))}
               </select>
-              <label className='form-label fw-bold' htmlFor='trayecto' id='label-trayecto'>
+              <label className='form-label fw-bold' htmlFor='id_trayecto' id='label-id_trayecto'>
                 Seleccioná un trayecto
               </label>
             </div>
