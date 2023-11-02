@@ -76,14 +76,22 @@ export const validateData = (trayectoBody) => {
   return validData;
 };
 
-export const handlerSendData = (trayecto, setTrayecto) => {
+export const handlerSendData = async (trayecto, setTrayecto) => {
   setTrayecto({ ...trayecto, loading: true });
 
-  toast.promise(axios.post(`/trayecto`, trayecto.body), {
+  const promise = axios.post(`/trayecto`, trayecto.body);
+
+  toast.promise(promise, {
     loading: 'Creando...',
     success: '¡Trayecto creado correctamente!',
     error: 'Ocurrio un error al crear el trayecto.',
   });
 
-  setTrayecto({ ...trayecto, loading: false });
+  const result = await promise;
+
+  if (result.status === 200) {
+    setTrayecto({ ...trayecto, loading: false });
+  } else {
+    setTrayecto({ ...trayecto, loading: false });
+  }
 };
