@@ -1,27 +1,29 @@
 import { useState } from 'react';
 import Editor from '@monaco-editor/react';
+import ThemeDropwdown from './ThemeDropdown';
 
-const IDE = ({ onChange, language, code, theme }) => {
+const TextEditor = ({ onChange, language, code, theme }) => {
   const [value, setValue] = useState(code || '');
 
   const handleEditorChange = (value) => {
     setValue(value);
-    onChange('code', value);
+    // onChange('code', value);
   };
 
   return (
-    <div className=''>
+    <div className='text-ide'>
+      <ThemeDropwdown />
       <Editor
         defaultValue='// comentario'
-        height='85vh'
+        height='65vh'
         language={language || 'javascript'}
-        theme={theme}
+        theme={'vs-dark'}
         value={value}
         width={`100%`}
-        onChange={handleEditorChange}
+        // onChange={handleEditorChange}
       />
     </div>
   );
 };
 
-export default IDE;
+export default TextEditor;
