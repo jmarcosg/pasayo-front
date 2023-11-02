@@ -3,15 +3,9 @@ import { Modal } from '../../../../components';
 import FormCrearExperiencia from './FormCrearExperiencia';
 import FormCrearTrayecto from './FormCrearTrayecto';
 
-const ModalCrearExperiencia = ({ showModal, toggleModal }) => {
+const ModalCrearExperiencia = ({ experiences, getExperiencias, setExperiences, showModal, toggleModal }) => {
   const [selectedForm, setSelectedForm] = useState(''); // experiencia | trayecto
   let [modalTitle, setModalTitle] = useState('');
-  const [trayecto, setTrayecto] = useState({
-    listado: null,
-    selected: 'default',
-    loading: false,
-    error: null,
-  });
 
   const handleFormSelection = (exp) => {
     // add active class to selected form
@@ -48,7 +42,13 @@ const ModalCrearExperiencia = ({ showModal, toggleModal }) => {
         </div>
 
         {selectedForm === 'experiencia' && (
-          <FormCrearExperiencia setModalTitle={setModalTitle} toggleModal={toggleModal} />
+          <FormCrearExperiencia
+            experiences={experiences}
+            getExperiencias={getExperiencias}
+            setExperiences={setExperiences}
+            setModalTitle={setModalTitle}
+            toggleModal={toggleModal}
+          />
         )}
 
         {selectedForm === 'trayecto' && <FormCrearTrayecto setModalTitle={setModalTitle} toggleModal={toggleModal} />}

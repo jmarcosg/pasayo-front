@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getTiposTrayectos, handlerSendData, temasExperiencias, validateData } from './handlers';
 import { getSession } from '../../../../../utils/auth';
 
-const FormCrearExperiencia = ({ setModalTitle, toggleModal }) => {
+const FormCrearExperiencia = ({ experiences, getExperiencias, setExperiences, setModalTitle, toggleModal }) => {
   const { username } = getSession();
   const [trayecto, setTrayecto] = useState({
     data: null,
@@ -20,6 +20,7 @@ const FormCrearExperiencia = ({ setModalTitle, toggleModal }) => {
       tema: '',
       user: username,
     },
+    sent: false,
     loading: false,
     error: null,
   });
@@ -39,6 +40,12 @@ const FormCrearExperiencia = ({ setModalTitle, toggleModal }) => {
 
     getTiposTrayectos(trayecto, setTrayecto);
   }, []);
+
+  useEffect(() => {
+    if (experiencia.sent) {
+      getExperiencias(experiences, setExperiences);
+    }
+  }, [experiencia.sent]);
 
   return (
     <>

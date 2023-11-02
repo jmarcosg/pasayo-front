@@ -143,6 +143,9 @@ const TopicFilter = ({ experiences, getExperiencias, setExperiences }) => {
           </button>
 
           <ModalCrearExperiencia
+            experiences={experiences}
+            getExperiencias={getExperiencias}
+            setExperiences={setExperiences}
             setShowModal={showModalCrearExperiencia}
             showModal={showModalCrearExperiencia}
             toggleModal={toggleModalSolicitar}

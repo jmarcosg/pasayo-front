@@ -108,14 +108,22 @@ export const validateData = (experienciaBody) => {
   return validData;
 };
 
-export const handlerSendData = (experiencia, setExperiencia) => {
-  setExperiencia({ ...experiencia, loading: true });
+export const handlerSendData = async (experiencia, setExperiencia) => {
+  setExperiencia({ ...experiencia, sent: false, loading: true });
 
-  toast.promise(axios.post(`/experiencia`, experiencia.body), {
+  const promise = axios.post(`/experiencia`, experiencia.body);
+
+  toast.promise(promise, {
     loading: 'Creando...',
     success: '¡Experiencia creada correctamente!',
     error: 'Ocurrio un error al crear la experiencia.',
   });
 
-  setExperiencia({ ...experiencia, loading: false });
+  const result = await promise;
+
+  if (result.status === 200) {
+    setExperiencia({ ...experiencia, sent: true, loading: false });
+  } else {
+    setExperiencia({ ...experiencia, loading: false });
+  }
 };
