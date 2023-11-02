@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getTiposTrayectos, handlerSendData, temasExperiencias, validateData } from './handlers';
 import { getSession } from '../../../../../utils/auth';
 
-const FormCrearExperiencia = ({ experiences, getExperiencias, setExperiences, setModalTitle, toggleModal }) => {
+const FormCrearExperiencia = (props) => {
   const { username } = getSession();
   const [trayecto, setTrayecto] = useState({
     data: null,
@@ -36,14 +36,14 @@ const FormCrearExperiencia = ({ experiences, getExperiencias, setExperiences, se
   };
 
   useEffect(() => {
-    setModalTitle('Crear Nueva Experiencia');
+    props.setModalTitle('Crear Nueva Experiencia');
 
     getTiposTrayectos(trayecto, setTrayecto);
   }, []);
 
   useEffect(() => {
     if (experiencia.sent) {
-      getExperiencias(experiences, setExperiences);
+      props.getExperiencias(props.experiences, props.setExperiences);
     }
   }, [experiencia.sent]);
 
@@ -228,7 +228,12 @@ const FormCrearExperiencia = ({ experiences, getExperiencias, setExperiences, se
 
         <div className='row mt-5 px-2'>
           <div className='col d-flex justify-content-end'>
-            <button className='btn btn-danger me-2' disabled={experiencia.loading} type='button' onClick={toggleModal}>
+            <button
+              className='btn btn-danger me-2'
+              disabled={experiencia.loading}
+              type='button'
+              onClick={props.toggleModal}
+            >
               Cancelar
             </button>
             <button className='btn btn-warning' disabled={experiencia.loading} type='button' onClick={sendData}>
