@@ -26,18 +26,15 @@ const ExperiencieCard = ({ data }) => {
 
       <div className='d-grid gap-3'>
         <div aria-label='Acciones Experiencia' className='btn-group' role='group'>
-          <button className='btn btn-warning rounded-0' type='button'>
-            <i className='bi bi-puzzle' />
-          </button>
-          <Link to={`/texto/${data._id}`}>
-            <button className='btn btn-warning rounded-0' type='button'>
-              <i className='bi bi-code-square' />
-            </button>
+          <Link className='btn btn-warning rounded-0' to={`/texto/${data._id}`}>
+            <i className='bi bi-play-fill' />
           </Link>
 
-          <button className='btn btn-warning rounded-0' type='button'>
-            <i className='bi bi-eye' />
-          </button>
+          <Link className='btn btn-warning rounded-0' to={`/texto/${data._id}/sesion`}>
+            <i className='bi bi-play-fill' />
+            <i className='bi bi-people-fill' />
+          </Link>
+
           {data?.user === username && (
             <button className='btn btn-danger rounded-0' type='button' onClick={toggleModalBorrar}>
               <i className='bi bi-trash' />
