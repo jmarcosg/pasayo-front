@@ -24,7 +24,7 @@ const TextCoding = () => {
 
   return (
     <>
-      <div className='px-4'>
+      <div className='container'>
         <Link className='btn btn-warning my-2' to={'/'}>
           <i className='fas fa-arrow-left' /> Volver al Inicio
         </Link>
