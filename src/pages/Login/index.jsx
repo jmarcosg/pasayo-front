@@ -56,12 +56,12 @@ const Login = () => {
               />
               <div className='d-flex justify-content-center mt-3'>
                 <button className='btn btn-warning w-100' type='submit'>
-                  <i className='bi bi-chat-heart' /> Entrar
+                  <i className='bi bi-box-arrow-in-right' /> Entrar
                 </button>
               </div>
               <div className='d-flex justify-content-center mt-3'>
                 <a className='btn btn-warning w-100' role='button'>
-                  <i className='bi bi-person-hearts' /> Crear Cuenta
+                  <i className='bi bi-person-fill-add' /> Crear Cuenta
                 </a>
               </div>
             </form>
