@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import Editor from '@monaco-editor/react';
+import Tooltip from '../Tooltip';
 import { options } from './handlers';
 
-const TextEditor = ({ code, setCode }) => {
+const TextEditor = ({ code, setCode, observer }) => {
   const [value, setValue] = useState(code.body);
 
   const handleEditorChange = (value) => {
@@ -30,8 +31,8 @@ const TextEditor = ({ code, setCode }) => {
   return (
     <div className='row justify-content-center'>
       <Editor
-        defaultValue={'// Parece que no hay nada aquí...'}
-        height='65vh'
+        defaultValue={code.body || '// Parece que no hay nada aquí...'}
+        height='42vh'
         language={'javascript'}
         loading={'Cargando...'}
         options={options}
@@ -41,17 +42,31 @@ const TextEditor = ({ code, setCode }) => {
         onChange={handleEditorChange}
       />
       {code.body && (
-        <div aria-label='Botonera' className='btn-group' role='group'>
-          <button className='btn btn-warning' onClick={handleRunCode}>
-            <i className='bi bi-play-fill' />
-          </button>
-          <button
-            className={`btn ${code.compiled ? 'btn-warning' : 'btn-outline-warning'}`}
-            disabled={!code.compiled}
-            type='button'
-          >
-            Guardar como solución
-          </button>
+        <div aria-label='Botonera' className='btn-group mt-2' role='group'>
+          <Tooltip position='bottom' tooltipText='Ejecutar código'>
+            <button className='btn btn-warning' onClick={handleRunCode}>
+              <i className='bi bi-play-fill' />
+            </button>
+          </Tooltip>
+
+          {!observer && (
+            <>
+              <Tooltip position='bottom' tooltipText='Compartir sesión'>
+                <button className='btn btn-warning' type='button'>
+                  <i className='bi bi-share-fill' />
+                </button>
+              </Tooltip>
+              <Tooltip position='bottom' tooltipText='Guardar como solución'>
+                <button
+                  className={`btn ${code.compiled ? 'btn-warning' : 'btn-outline-warning'}`}
+                  disabled={!code.compiled}
+                  type='button'
+                >
+                  <i className='bi bi-floppy2-fill' />
+                </button>
+              </Tooltip>
+            </>
+          )}
         </div>
       )}
     </div>
