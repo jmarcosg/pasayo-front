@@ -69,6 +69,13 @@ const TextEditor = ({ code, setCode, isSession }) => {
           )}
         </div>
       )}
+      <h5 className='mt-2'>Usuarios Conectados</h5>
+      <div className='d-grid gap-2 justify-content-start'>
+        <span className='badge bg-dark fs-5 d-flex gap-2'>
+          <i className='bi bi-person-fill' />
+          <span>user</span>
+        </span>
+      </div>
     </div>
   );
 };
