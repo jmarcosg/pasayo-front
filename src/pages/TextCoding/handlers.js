@@ -9,7 +9,7 @@ export const getExperiencia = async (experiencia, setExperiencia, code, setCode,
 
     toast.promise(promise, {
       loading: 'Cargando...',
-      success: '¡Ya se puede jugar!',
+      success: '¡A jugar!',
       error: 'Ocurrio al buscar la partida.',
     });
 
