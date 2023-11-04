@@ -1,7 +1,7 @@
 // import { Router } from './router';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './components';
-import { Login, Home, TextCodingSession } from './pages';
+import { Login, Home, TextCoding } from './pages';
 
 const App = () => {
   return (
@@ -9,7 +9,7 @@ const App = () => {
       <Routes>
         <Route element={<Layout />}>
           <Route element={<Home />} path='/' />
-          <Route element={<TextCodingSession />} path='/texto' />
+          <Route element={<TextCoding />} path='/texto' />
           <Route element={<Login />} path='/login' />
         </Route>
       </Routes>
