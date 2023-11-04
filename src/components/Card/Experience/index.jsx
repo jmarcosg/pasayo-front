@@ -29,7 +29,7 @@ const ExperiencieCard = ({ data }) => {
           <button className='btn btn-warning rounded-0' type='button'>
             <i className='bi bi-puzzle' />
           </button>
-          <Link to={'/texto'}>
+          <Link to={`/texto/${data._id}`}>
             <button className='btn btn-warning rounded-0' type='button'>
               <i className='bi bi-code-square' />
             </button>
