@@ -31,25 +31,35 @@ const TextCoding = () => {
       </div>
 
       <div className='container mt-2'>
-        <div className='card mb-2'>
-          <div className='card-header'>
-            <span className='fw-bold'>{experiencia?.data?.titulo?.toUpperCase()}</span>
+        {!experiencia?.loading && !experiencia?.data && (
+          <div className='alert alert-danger text-center' role='alert'>
+            No se pudo encontrar la experiencia solicitada.
           </div>
-          <ul className='list-group list-group-flush'>
-            <li className='list-group-item fst-italic d-flex gap-2'>
-              <i className='bi bi-chat-fill' /> <span>{experiencia?.data?.narrativa}</span>
-            </li>
-            <li className='list-group-item fw-bold d-flex gap-2'>
-              <i className='bi bi-bullseye' />
-              <span>{experiencia?.data?.objetivo}</span>
-            </li>
-            <li className='list-group-item'>
-              <span className='badge text-bg-secondary'>{experiencia?.data?.tema}</span>
-            </li>
-          </ul>
-        </div>
+        )}
 
-        <TextEditor code={code} setCode={setCode} />
+        {!experiencia?.loading && experiencia?.data && (
+          <>
+            <div className='card mb-2'>
+              <div className='card-header'>
+                <span className='fw-bold'>{experiencia?.data?.titulo?.toUpperCase()}</span>
+              </div>
+              <ul className='list-group list-group-flush'>
+                <li className='list-group-item fst-italic d-flex gap-2'>
+                  <i className='bi bi-chat-fill' /> <span>{experiencia?.data?.narrativa}</span>
+                </li>
+                <li className='list-group-item fw-bold d-flex gap-2'>
+                  <i className='bi bi-bullseye' />
+                  <span>{experiencia?.data?.objetivo}</span>
+                </li>
+                <li className='list-group-item'>
+                  <span className='badge text-bg-secondary'>{experiencia?.data?.tema}</span>
+                </li>
+              </ul>
+            </div>
+
+            <TextEditor code={code} setCode={setCode} />
+          </>
+        )}
       </div>
     </>
   );
