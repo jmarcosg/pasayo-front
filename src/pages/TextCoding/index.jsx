@@ -1,8 +1,10 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { TextEditor } from '../../components';
+import { getExperiencia } from './handlers';
 
 const TextCoding = () => {
+  let { id } = useParams();
   const [experiencia, setExperiencia] = useState({
     data: null,
     loading: false,
@@ -15,6 +17,10 @@ const TextCoding = () => {
     error: null,
     sending: false,
   });
+
+  useEffect(() => {
+    getExperiencia(experiencia, setExperiencia, code, setCode, id);
+  }, []);
 
   return (
     <>
