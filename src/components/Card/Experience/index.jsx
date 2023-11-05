@@ -27,12 +27,11 @@ const ExperiencieCard = ({ data }) => {
       <div className='d-grid gap-3'>
         <div aria-label='Acciones Experiencia' className='btn-group' role='group'>
           <Link className='btn btn-warning rounded-0' to={`/texto/${data._id}`}>
-            <i className='bi bi-play-fill' />
+            <i className='bi bi-eye-fill' />
           </Link>
 
-          <Link className='btn btn-warning rounded-0' to={`/texto/${data._id}/sesion`}>
+          <Link className='btn btn-warning rounded-0' to={`/texto/${data._id}/usuario/${username}`}>
             <i className='bi bi-play-fill' />
-            <i className='bi bi-people-fill' />
           </Link>
 
           {data?.user === username && (
