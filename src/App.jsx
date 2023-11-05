@@ -11,8 +11,8 @@ const App = () => {
           <Route element={<Login />} path='/login' />
           <Route element={<Home />} path='/' />
           <Route element={<TextCoding />} path='/texto/:id' />
-          <Route element={<TextCodingSession />} path='/texto/:id/sesion' />
-          <Route element={<TextCodingSession />} path='/texto/:id/sesion/:session' />
+          <Route element={<TextCodingSession />} path='/texto/:id/usuario/:user' />
+          <Route element={<TextCodingSession />} path='/texto/:id/usuario/:user/sesion/:session' />
         </Route>
       </Routes>
     </BrowserRouter>
