@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { TextEditor } from '../../components';
-import { getExperiencia } from './handlers';
+import { createSession, getExperiencia, joinSession } from './handlers';
 
 const TextCodingSession = () => {
   let { id, user, session: sessionID } = useParams();
@@ -10,6 +10,7 @@ const TextCodingSession = () => {
     loading: false,
     error: null,
   });
+  const [room, setRoom] = useState(null);
 
   const [experiencia, setExperiencia] = useState({
     data: null,
@@ -25,23 +26,23 @@ const TextCodingSession = () => {
   });
 
   useEffect(() => {
-    console.log(`exp id: ${id}`);
-    console.log(`user: ${user}`);
-    if (sessionID) {
-      console.log(`session id ${sessionID}`);
-    }
+    createSession(session, setSession, id, user);
   }, []);
 
   useEffect(() => {
     if (session.data) {
-      getExperiencia(experiencia, setExperiencia, code, setCode, id);
+      joinSession(session, setSession, session.data._id);
     }
+
+    // if (session.data && sessionID) {
+    //   joinSession(session, setSession, session.data._id);
+    // }
   }, [session]);
 
   return (
     <>
       <div className='container'>
-        <Link className='btn btn-warning my-2' to={'/'}>
+        <Link className='btn btn-warning my-2' to={'/'} onClick={() => console.log('disconnect session')}>
           <i className='fas fa-arrow-left' /> Volver al Inicio
         </Link>
       </div>

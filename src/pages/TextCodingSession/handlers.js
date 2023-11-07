@@ -1,9 +1,9 @@
 import io from 'socket.io-client';
 import { toast } from 'react-hot-toast';
 import { axios } from '../../utils/axios';
-import { URL_SHARED_SESSION } from '../../utils/config';
+import { URL_BACK } from '../../utils/config';
 
-const socket = io(URL_SHARED_SESSION);
+const socket = io(URL_BACK);
 
 export const getExperiencia = async (experiencia, setExperiencia, code, setCode, id) => {
   try {
@@ -26,11 +26,11 @@ export const getExperiencia = async (experiencia, setExperiencia, code, setCode,
   }
 };
 
-export const createSession = async (session, setSession, id) => {
+export const createSession = async (session, setSession, id, user) => {
   try {
     setSession({ ...session, loading: true });
 
-    const promise = axios.post('/session', { id_experiencia: id });
+    const promise = axios.post('/session', { id_experiencia: id, user });
 
     toast.promise(promise, {
       loading: 'Creando sesión...',
@@ -50,17 +50,51 @@ export const joinSession = async (session, setSession, id) => {
   try {
     setSession({ ...session, loading: true });
 
-    const promise = axios.get(`/session/${id}`);
+    if (!session.data) {
+      const getSession = axios.get(`/session/${id}`);
+
+      toast.promise(getSession, {
+        loading: 'Obteniendo sesión...',
+        success: '¡Obtuve la sesión!',
+        error: 'Ocurrio al obtener a la sesión.',
+      });
+
+      const { data } = await getSession;
+
+      setSession({ ...session, data });
+    }
+
+    const joinRoom = () => {
+      socket.emit('user_join_room', { session: session.data._id, user: session.data.user });
+    };
+
+    // toast.promise(joinRoom, {
+    //   loading: 'Uniendome a la sesión...',
+    //   success: '¡Me uní a la sesión!',
+    //   error: 'Ocurrio al unirme a la sesión.',
+    // });
+
+    setSession({ ...session, loading: false });
+  } catch (error) {
+    setSession({ ...session, error, loading: false });
+  }
+};
+
+export const disconnectSession = async (session, setSession) => {
+  try {
+    setSession({ ...session, loading: true });
+
+    const promise = axios.delete(`/session/${session.data._id}`);
 
     toast.promise(promise, {
-      loading: 'Uniendose a sesión...',
-      success: '¡Me uní a la sesión!',
-      error: 'Ocurrio al unirme a la sesión.',
+      loading: 'Desconectando...',
+      success: '¡Desconectado!',
+      error: 'Ocurrio al desconectarme.',
     });
 
-    const { data } = await promise;
+    await promise;
 
-    setSession({ ...session, data, loading: false });
+    setSession({ ...session, data: null, loading: false });
   } catch (error) {
     setSession({ ...session, error, loading: false });
   }
