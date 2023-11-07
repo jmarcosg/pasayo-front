@@ -47,6 +47,12 @@ const ExperiencieCard = ({ data }) => {
           <i className='bi bi-signpost-fill' />
           {data?.trayecto[0]?.tema}
         </span>
+
+        <span className='badge text-bg-success d-flex gap-1'>
+          <i className='bi bi-code-slash' />
+          TEXTO
+        </span>
+
         <span className='badge text-bg-danger d-flex gap-1'>
           <i className='bi bi-person-fill' />
           {data?.user}
