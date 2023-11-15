@@ -31,7 +31,7 @@ const TextEditor = ({ code, setCode, isSession }) => {
   return (
     <div className='row justify-content-center'>
       <Editor
-        defaultValue={code.body || '// Parece que no hay nada aquí...'}
+        defaultValue={!isSession ? code.body : ''}
         height='42vh'
         language={'javascript'}
         loading={'Cargando...'}
@@ -71,11 +71,11 @@ const TextEditor = ({ code, setCode, isSession }) => {
       )}
       {isSession && (
         <>
-          <h5 className='mt-2'>Usuarios Conectados</h5>
+          <h5 className='mt-3'>Usuarios Conectados</h5>
           <div className='d-grid gap-2 justify-content-start'>
-            <span className='badge bg-dark fs-5 d-flex gap-2'>
+            <span className='badge bg-dark fs-6 d-flex gap-2'>
               <i className='bi bi-person-fill' />
-              <span>user</span>
+              <span>jmarcosg</span>
             </span>
           </div>
         </>
