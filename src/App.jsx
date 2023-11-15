@@ -12,7 +12,7 @@ const App = () => {
           <Route element={<Home />} path='/' />
           <Route element={<TextCoding />} path='/texto/:id' />
           <Route element={<TextCodingSession />} path='/texto/:id/usuario/:user' />
-          <Route element={<TextCodingSession />} path='/texto/:id/usuario/:user/sesion/:session' />
+          <Route element={<TextCodingSession />} path='/texto/:id/usuario/:user/sala/:room' />
         </Route>
       </Routes>
     </BrowserRouter>
