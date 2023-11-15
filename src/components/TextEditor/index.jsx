@@ -69,17 +69,6 @@ const TextEditor = ({ code, setCode, isSession }) => {
           )}
         </div>
       )}
-      {isSession && (
-        <>
-          <h5 className='mt-3'>Usuarios Conectados</h5>
-          <div className='d-grid gap-2 justify-content-start'>
-            <span className='badge bg-dark fs-6 d-flex gap-2'>
-              <i className='bi bi-person-fill' />
-              <span>jmarcosg</span>
-            </span>
-          </div>
-        </>
-      )}
     </div>
   );
 };

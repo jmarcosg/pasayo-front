@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import io from 'socket.io-client';
+import { toast } from 'react-hot-toast';
 import { TextEditor } from '../../components';
 import { createSession, getExperiencia, joinSession } from './handlers';
 import { URL_BACK } from '../../utils/config';
@@ -9,12 +10,13 @@ import { getSession } from '../../utils/auth';
 let socket;
 
 const TextCodingSession = () => {
-  let { id, user, room } = useParams();
-  const { username } = getSession();
+  let { id, user: paramUser, room } = useParams();
+  const { username: user } = getSession();
   const [session, setSession] = useState({
     data: null,
     loading: false,
     error: null,
+    users: [],
   });
 
   const [experiencia, setExperiencia] = useState({
@@ -37,9 +39,8 @@ const TextCodingSession = () => {
   useEffect(() => {
     socket = io(URL_BACK);
 
-    if (user === username) {
-      console.log('crea session');
-      createSession(session, setSession, id, user);
+    if (paramUser === user) {
+      createSession(session, setSession, id, paramUser);
     }
   }, []);
 
@@ -48,10 +49,16 @@ const TextCodingSession = () => {
 
     socket.emit('user_join_room', { room, user }, (error) => {
       if (error) {
-        console.log(error);
+        toast.error(error);
       }
     });
   }, [URL_BACK, room]);
+
+  useEffect(() => {
+    socket.on('user_joined_room', (payload) => {
+      setSession({ ...session, users: [...session.users, payload] });
+    });
+  }, []);
 
   useEffect(() => {
     if (session.data) {
@@ -100,6 +107,17 @@ const TextCodingSession = () => {
           </div>
 
           <TextEditor isSession code={code} setCode={setCode} />
+
+          <h5 className='mt-3'>Usuarios Conectados</h5>
+          <div className='d-flex gap-2 justify-content-start'>
+            {session.users &&
+              session.users.map((user, i) => (
+                <span key={i} className='badge bg-dark fs-6 d-flex gap-2'>
+                  <i className='bi bi-person-fill' />
+                  <span>{user}</span>
+                </span>
+              ))}
+          </div>
         </div>
       )}
     </>
