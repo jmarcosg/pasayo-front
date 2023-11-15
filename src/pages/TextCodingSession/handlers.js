@@ -1,9 +1,5 @@
-import io from 'socket.io-client';
 import { toast } from 'react-hot-toast';
 import { axios } from '../../utils/axios';
-import { URL_BACK } from '../../utils/config';
-
-const socket = io(URL_BACK);
 
 export const getExperiencia = async (experiencia, setExperiencia, code, setCode, id) => {
   try {
@@ -46,33 +42,19 @@ export const createSession = async (session, setSession, id, user) => {
   }
 };
 
-export const joinSession = async (session, setSession, id) => {
+export const joinSession = async (session, setSession, socket, id) => {
   try {
     setSession({ ...session, loading: true });
 
-    if (!session.data) {
-      const getSession = axios.get(`/session/${id}`);
+    // const resp = await socket.emit('user_join_room', { session: id, user: session.data.user });
 
-      toast.promise(getSession, {
-        loading: 'Obteniendo sesión...',
-        success: '¡Obtuve la sesión!',
-        error: 'Ocurrio al obtener a la sesión.',
-      });
+    // console.log(joinRoom);
 
-      const { data } = await getSession;
-
-      setSession({ ...session, data });
-    }
-
-    const joinRoom = () => {
-      socket.emit('user_join_room', { session: session.data._id, user: session.data.user });
-    };
-
-    // toast.promise(joinRoom, {
-    //   loading: 'Uniendome a la sesión...',
-    //   success: '¡Me uní a la sesión!',
-    //   error: 'Ocurrio al unirme a la sesión.',
-    // });
+    // if (joinRoom.connected && joinRoom.id === id) {
+    //   toast.success('¡Me uní a la sesión!');
+    // } else {
+    //   toast.error('Ocurrio al unirme a la sesión.');
+    // }
 
     setSession({ ...session, loading: false });
   } catch (error) {

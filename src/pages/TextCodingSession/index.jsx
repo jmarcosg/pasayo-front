@@ -1,16 +1,21 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import io from 'socket.io-client';
 import { TextEditor } from '../../components';
 import { createSession, getExperiencia, joinSession } from './handlers';
+import { URL_BACK } from '../../utils/config';
+import { getSession } from '../../utils/auth';
+
+let socket;
 
 const TextCodingSession = () => {
-  let { id, user, session: sessionID } = useParams();
+  let { id, user, room } = useParams();
+  const { username } = getSession();
   const [session, setSession] = useState({
     data: null,
     loading: false,
     error: null,
   });
-  const [room, setRoom] = useState(null);
 
   const [experiencia, setExperiencia] = useState({
     data: null,
@@ -25,24 +30,39 @@ const TextCodingSession = () => {
     sending: false,
   });
 
+  const disconnectFromSession = () => {
+    socket.disconnect();
+  };
+
   useEffect(() => {
-    createSession(session, setSession, id, user);
+    socket = io(URL_BACK);
+
+    if (user === username) {
+      console.log('crea session');
+      createSession(session, setSession, id, user);
+    }
   }, []);
 
   useEffect(() => {
-    if (session.data) {
-      joinSession(session, setSession, session.data._id);
-    }
+    socket = io(URL_BACK);
 
-    // if (session.data && sessionID) {
-    //   joinSession(session, setSession, session.data._id);
-    // }
-  }, [session]);
+    socket.emit('user_join_room', { room, user }, (error) => {
+      if (error) {
+        console.log(error);
+      }
+    });
+  }, [URL_BACK, room]);
+
+  useEffect(() => {
+    if (session.data) {
+      getExperiencia(experiencia, setExperiencia, code, setCode, id);
+    }
+  }, [session.data]);
 
   return (
     <>
       <div className='container'>
-        <Link className='btn btn-warning my-2' to={'/'} onClick={() => console.log('disconnect session')}>
+        <Link className='btn btn-warning my-2' to={'/'} onClick={() => disconnectFromSession}>
           <i className='fas fa-arrow-left' /> Volver al Inicio
         </Link>
       </div>
@@ -59,7 +79,7 @@ const TextCodingSession = () => {
         </div>
       )}
 
-      {!session.loading && !experiencia.loading && experiencia.data && (
+      {!experiencia.loading && experiencia.data && (
         <div className='container mt-2'>
           <div className='card mb-2'>
             <div className='card-header'>
