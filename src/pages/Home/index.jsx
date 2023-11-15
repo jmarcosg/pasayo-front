@@ -32,7 +32,7 @@ const Home = () => {
           <ResponsiveMasonry columnsCountBreakPoints={{ 300: 1, 576: 1, 768: 2, 992: 3, 1200: 3, 1400: 3 }}>
             <Masonry columnsCount={3} gutter={'2rem'}>
               {experiences.data.map((experience, i) => (
-                <ExperienceCard key={i} data={experience} />
+                <ExperienceCard key={i} data={experience} room={Math.random().toString(36).slice(2)} />
               ))}
             </Masonry>
           </ResponsiveMasonry>
