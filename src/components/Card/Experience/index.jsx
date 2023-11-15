@@ -3,7 +3,7 @@ import { getSession } from '../../../utils/auth';
 import ModalBorrarExperiencia from './ModalBorrarExperiencia';
 import { Link } from 'react-router-dom';
 
-const ExperiencieCard = ({ data }) => {
+const ExperiencieCard = ({ data, room }) => {
   const { username } = getSession();
   const [showModalBorrarExperiencia, setShowModalBorrarExperiencia] = useState(false);
 
@@ -30,7 +30,7 @@ const ExperiencieCard = ({ data }) => {
             <i className='bi bi-eye-fill' />
           </Link>
 
-          <Link className='btn btn-warning rounded-0' to={`/texto/${data._id}/usuario/${username}`}>
+          <Link className='btn btn-warning rounded-0' to={`/texto/${data._id}/usuario/${username}/sala/${room}`}>
             <i className='bi bi-play-fill' />
           </Link>
 
