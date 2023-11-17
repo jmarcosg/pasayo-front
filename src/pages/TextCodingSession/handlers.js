@@ -15,7 +15,6 @@ export const getExperiencia = async (experiencia, setExperiencia, code, setCode,
 
     const { data } = await promise;
 
-    setCode({ ...code, body: data?.solucion });
     setExperiencia({ ...experiencia, data, loading: false });
   } catch (error) {
     setExperiencia({ ...experiencia, error, loading: false });
@@ -26,7 +25,7 @@ export const createSession = async (session, setSession, id, user) => {
   try {
     setSession({ ...session, loading: true });
 
-    const promise = axios.post('/session', { id_experiencia: id, user });
+    const promise = axios.post('/session', { id_experiencia: id, user, codigo: '' });
 
     toast.promise(promise, {
       loading: 'Creando sesión...',
