@@ -42,7 +42,7 @@ const ExperiencieCard = ({ data, room }) => {
         </div>
       </div>
 
-      <div className='card-body text-bg-light d-flex justify-content-end gap-2'>
+      <div className='card-body text-bg-light d-flex flex-wrap justify-content-center gap-2'>
         <span className='badge text-bg-secondary d-flex gap-1'>
           <i className='bi bi-signpost-fill' />
           {data?.trayecto[0]?.tema}
