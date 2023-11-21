@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 import { toast } from 'react-hot-toast';
 import { TextEditor } from '../../components';
-import { createSession, getExperiencia, joinSession } from './handlers';
+import { createSession, getExperiencia, joinSession, saveCode } from './handlers';
 import { URL_BACK } from '../../utils/config';
 import { getSession } from '../../utils/auth';
 
@@ -16,15 +16,13 @@ const TextCodingSession = () => {
     data: null,
     loading: false,
     error: null,
-    users: [],
   });
-
+  const [users, setUsers] = useState([]);
   const [experiencia, setExperiencia] = useState({
     data: null,
     loading: false,
     error: null,
   });
-
   const [code, setCode] = useState({
     body: '',
     compiled: false,
@@ -33,7 +31,11 @@ const TextCodingSession = () => {
   });
 
   const disconnectFromSession = () => {
-    socket.disconnect();
+    socket.on('disconnect', (user) => {
+      const filteredUsers = users.filter((item) => item !== user);
+
+      setUsers((current) => [...current, filteredUsers]);
+    });
   };
 
   useEffect(() => {
@@ -45,8 +47,6 @@ const TextCodingSession = () => {
   }, []);
 
   useEffect(() => {
-    socket = io(URL_BACK);
-
     socket.emit('user_join_room', { room, user }, (error) => {
       if (error) {
         toast.error(error);
@@ -56,7 +56,13 @@ const TextCodingSession = () => {
 
   useEffect(() => {
     socket.on('user_joined_room', (payload) => {
-      setSession({ ...session, users: [...session.users, payload] });
+      setUsers((current) => [...current, payload]);
+    });
+  }, []);
+
+  useEffect(() => {
+    socket.on('user_coding', (payload) => {
+      setCode({ ...code, body: payload.newCode, compiled: false });
     });
   }, []);
 
@@ -106,12 +112,11 @@ const TextCodingSession = () => {
             </ul>
           </div>
 
-          <TextEditor isSession code={code} setCode={setCode} />
+          <TextEditor isSession code={code} saveCode={saveCode} setCode={setCode} />
 
-          <h5 className='mt-3'>Usuarios Conectados</h5>
-          <div className='d-flex gap-2 justify-content-start'>
-            {session.users &&
-              session.users.map((user, i) => (
+          <div className='d-flex gap-2 flex-wrap justify-content-start mt-4'>
+            {users &&
+              users.map((user, i) => (
                 <span key={i} className='badge bg-dark fs-6 d-flex gap-2'>
                   <i className='bi bi-person-fill' />
                   <span>{user}</span>
