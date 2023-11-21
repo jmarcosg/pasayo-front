@@ -4,7 +4,7 @@ import Editor from '@monaco-editor/react';
 import Tooltip from '../Tooltip';
 import { options } from './handlers';
 
-const TextEditor = ({ code, setCode, isSession }) => {
+const TextEditor = ({ code, setCode, saveCode, isSession }) => {
   const [value, setValue] = useState(code.body);
 
   const handleEditorChange = (value) => {
@@ -41,34 +41,34 @@ const TextEditor = ({ code, setCode, isSession }) => {
         width={`100%`}
         onChange={handleEditorChange}
       />
-      {code.body && (
-        <div aria-label='Botonera' className='btn-group mt-2' role='group'>
-          <Tooltip position='bottom' tooltipText='Ejecutar código'>
-            <button className='btn btn-warning' onClick={handleRunCode}>
-              <i className='bi bi-play-fill' />
-            </button>
-          </Tooltip>
 
-          {isSession && (
-            <>
-              <Tooltip position='bottom' tooltipText='Compartir sesión'>
-                <button className='btn btn-warning' type='button'>
-                  <i className='bi bi-share-fill' />
-                </button>
-              </Tooltip>
-              <Tooltip position='bottom' tooltipText='Guardar como solución'>
-                <button
-                  className={`btn ${code.compiled ? 'btn-warning' : 'btn-outline-warning'}`}
-                  disabled={!code.compiled}
-                  type='button'
-                >
-                  <i className='bi bi-floppy2-fill' />
-                </button>
-              </Tooltip>
-            </>
-          )}
-        </div>
-      )}
+      <div aria-label='Botonera' className='btn-group mt-2' role='group'>
+        <Tooltip position='bottom' tooltipText='Ejecutar código'>
+          <button className={`btn ${code.body ? 'btn-warning' : 'btn-outline-warning'}`} onClick={handleRunCode}>
+            <i className='bi bi-play-fill' />
+          </button>
+        </Tooltip>
+
+        {isSession && (
+          <>
+            <Tooltip position='bottom' tooltipText='Compartir sesión'>
+              <button className='btn btn-warning' type='button'>
+                <i className='bi bi-share-fill' />
+              </button>
+            </Tooltip>
+            <Tooltip position='bottom' tooltipText='Guardar como solución'>
+              <button
+                className={`btn ${code.compiled ? 'btn-warning' : 'btn-outline-warning'}`}
+                disabled={!code.compiled}
+                type='button'
+                onClick={saveCode}
+              >
+                <i className='bi bi-floppy2-fill' />
+              </button>
+            </Tooltip>
+          </>
+        )}
+      </div>
     </div>
   );
 };
