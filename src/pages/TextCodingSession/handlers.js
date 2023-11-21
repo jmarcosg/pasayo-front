@@ -25,7 +25,13 @@ export const createSession = async (session, setSession, id, user) => {
   try {
     setSession({ ...session, loading: true });
 
-    const promise = axios.post('/session', { id_experiencia: id, user, codigo: '' });
+    const promise = axios.post('/session', {
+      id_experiencia: id,
+      user,
+      codigo: '',
+      observacion: '',
+      estado_observacion: '',
+    });
 
     toast.promise(promise, {
       loading: 'Creando sesión...',
@@ -41,7 +47,7 @@ export const createSession = async (session, setSession, id, user) => {
   }
 };
 
-export const joinSession = async (session, setSession, socket, id) => {
+export const joinSession = async (session, setSession, id) => {
   try {
     setSession({ ...session, loading: true });
 
@@ -71,6 +77,29 @@ export const disconnectSession = async (session, setSession) => {
       loading: 'Desconectando...',
       success: '¡Desconectado!',
       error: 'Ocurrio al desconectarme.',
+    });
+
+    await promise;
+
+    setSession({ ...session, data: null, loading: false });
+  } catch (error) {
+    setSession({ ...session, error, loading: false });
+  }
+};
+
+export const saveCode = async (session, setSession, code) => {
+  try {
+    setSession({ ...session, loading: true });
+
+    const promise = axios.put(`/session/${session.data._id}`, {
+      id_experiencia: session.data._id,
+      codigo: code.body,
+    });
+
+    toast.promise(promise, {
+      loading: 'Guardando sesión...',
+      success: '¡Sesión guardada!',
+      error: 'Ocurrio al guardar la sesión.',
     });
 
     await promise;
