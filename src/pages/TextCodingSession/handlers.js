@@ -1,7 +1,7 @@
 import { toast } from 'react-hot-toast';
 import { axios } from '../../utils/axios';
 
-export const getExperiencia = async (experiencia, setExperiencia, code, setCode, id) => {
+export const getExperiencia = async (experiencia, setExperiencia, id) => {
   try {
     setExperiencia({ ...experiencia, loading: true });
 
@@ -91,7 +91,8 @@ export const saveCode = async (session, setSession, code) => {
   try {
     setSession({ ...session, loading: true });
 
-    const promise = axios.put(`/session/${session.data._id}`, {
+    const promise = axios.put(`/session`, {
+      id: session.data._id,
       id_experiencia: session.data._id,
       codigo: code.body,
     });
@@ -104,7 +105,7 @@ export const saveCode = async (session, setSession, code) => {
 
     await promise;
 
-    setSession({ ...session, data: null, loading: false });
+    setSession({ ...session, loading: false });
   } catch (error) {
     setSession({ ...session, error, loading: false });
   }

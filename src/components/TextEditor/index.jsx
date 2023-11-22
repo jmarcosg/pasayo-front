@@ -4,7 +4,7 @@ import Editor from '@monaco-editor/react';
 import Tooltip from '../Tooltip';
 import { options } from './handlers';
 
-const TextEditor = ({ code, setCode, saveCode, isSession }) => {
+const TextEditor = ({ code, setCode, saveSession, isSession }) => {
   const [value, setValue] = useState(code.body);
 
   const handleEditorChange = (value) => {
@@ -61,7 +61,7 @@ const TextEditor = ({ code, setCode, saveCode, isSession }) => {
                 className={`btn ${code.compiled ? 'btn-warning' : 'btn-outline-warning'}`}
                 disabled={!code.compiled}
                 type='button'
-                onClick={saveCode}
+                onClick={saveSession}
               >
                 <i className='bi bi-floppy2-fill' />
               </button>

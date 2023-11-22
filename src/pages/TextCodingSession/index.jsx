@@ -38,6 +38,10 @@ const TextCodingSession = () => {
     });
   };
 
+  const saveSession = async () => {
+    saveCode(session, setSession, code);
+  };
+
   useEffect(() => {
     socket = io(URL_BACK);
 
@@ -68,7 +72,8 @@ const TextCodingSession = () => {
 
   useEffect(() => {
     if (session.data) {
-      getExperiencia(experiencia, setExperiencia, code, setCode, id);
+      getExperiencia(experiencia, setExperiencia, id);
+      setCode({ ...code, body: session.data.codigo });
     }
   }, [session.data]);
 
@@ -112,7 +117,7 @@ const TextCodingSession = () => {
             </ul>
           </div>
 
-          <TextEditor isSession code={code} saveCode={saveCode} setCode={setCode} />
+          <TextEditor isSession code={code} saveSession={saveSession} setCode={setCode} />
 
           <div className='d-flex gap-2 flex-wrap justify-content-start mt-4'>
             {users &&
