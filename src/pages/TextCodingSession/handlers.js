@@ -1,4 +1,5 @@
 import { toast } from 'react-hot-toast';
+import copy from 'copy-to-clipboard';
 import { axios } from '../../utils/axios';
 
 export const getExperiencia = async (experiencia, setExperiencia, id) => {
@@ -108,5 +109,13 @@ export const saveCode = async (session, setSession, code) => {
     setSession({ ...session, loading: false });
   } catch (error) {
     setSession({ ...session, error, loading: false });
+  }
+};
+
+export const copyToClipboard = (sharedSessionLink) => {
+  let isCopy = copy(sharedSessionLink);
+
+  if (isCopy) {
+    toast.success('Tu link se copió en el portapapeles. Podes hacer click derecho y seleccionar la opción PEGAR.');
   }
 };

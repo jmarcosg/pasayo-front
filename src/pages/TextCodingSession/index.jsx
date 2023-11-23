@@ -3,8 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 import { toast } from 'react-hot-toast';
 import { TextEditor } from '../../components';
-import { createSession, getExperiencia, joinSession, saveCode } from './handlers';
-import { URL_BACK } from '../../utils/config';
+import { createSession, getExperiencia, joinSession, saveCode, copyToClipboard } from './handlers';
+import { URL_BACK, URL_FRONT } from '../../utils/config';
 import { getSession } from '../../utils/auth';
 
 let socket;
@@ -12,6 +12,8 @@ let socket;
 const TextCodingSession = () => {
   let { id, user: paramUser, room } = useParams();
   const { username: user } = getSession();
+  let sharedSessionLink = '';
+
   const [session, setSession] = useState({
     data: null,
     loading: false,
@@ -40,6 +42,10 @@ const TextCodingSession = () => {
 
   const saveSession = async () => {
     saveCode(session, setSession, code);
+  };
+
+  const shareSessionLink = () => {
+    copyToClipboard(sharedSessionLink);
   };
 
   useEffect(() => {
@@ -76,6 +82,12 @@ const TextCodingSession = () => {
       setCode({ ...code, body: session.data.codigo });
     }
   }, [session.data]);
+
+  useEffect(() => {
+    if (experiencia.data) {
+      sharedSessionLink = `${URL_FRONT}/texto/${experiencia?.data?._id}/usuario/${user}`;
+    }
+  }, [experiencia.data]);
 
   return (
     <>
@@ -117,7 +129,13 @@ const TextCodingSession = () => {
             </ul>
           </div>
 
-          <TextEditor isSession code={code} saveSession={saveSession} setCode={setCode} />
+          <TextEditor
+            isSession
+            code={code}
+            saveSession={saveSession}
+            setCode={setCode}
+            shareSessionLink={shareSessionLink}
+          />
 
           <div className='d-flex gap-2 flex-wrap justify-content-start mt-4'>
             {users &&

@@ -4,7 +4,7 @@ import Editor from '@monaco-editor/react';
 import Tooltip from '../Tooltip';
 import { options } from './handlers';
 
-const TextEditor = ({ code, setCode, saveSession, isSession }) => {
+const TextEditor = ({ code, setCode, saveSession, isSession, shareSessionLink }) => {
   const [value, setValue] = useState(code.body);
 
   const handleEditorChange = (value) => {
@@ -52,7 +52,7 @@ const TextEditor = ({ code, setCode, saveSession, isSession }) => {
         {isSession && (
           <>
             <Tooltip position='bottom' tooltipText='Compartir sesión'>
-              <button className='btn btn-warning' type='button'>
+              <button className='btn btn-warning' type='button' onClick={shareSessionLink}>
                 <i className='bi bi-share-fill' />
               </button>
             </Tooltip>
