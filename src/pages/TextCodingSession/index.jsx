@@ -141,7 +141,8 @@ const TextCodingSession = () => {
             {users &&
               users.map((user, i) => (
                 <span key={i} className='badge bg-dark fs-6 d-flex gap-2'>
-                  <i className='bi bi-person-fill' />
+                  {user === paramUser && <i className='bi bi-person-fill' />}
+                  {!user === paramUser && <i className='bi bi-person' />}
                   <span>{user}</span>
                 </span>
               ))}
