@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { topics, authors, getFilteredExperiencias } from './handlers';
+import { topics, authors, types, getFilteredExperiencias } from './handlers';
 import ModalCrearExperiencia from './ModalCrearExperiencia';
 
 const TopicFilter = ({ experiences, getExperiencias, setExperiences }) => {
   const [selectedFilter, setSelectedFilter] = useState({
     topic: 'TODOS',
     author: 'TODAS',
+    type: 'TODOS',
     title: '',
   });
   const [showModalCrearExperiencia, setShowModalCrearExperiencia] = useState(false);
@@ -110,6 +111,36 @@ const TopicFilter = ({ experiences, getExperiencias, setExperiences }) => {
                         </>
                       }
                       {author.name}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className='btn-group' role='group'>
+              <button
+                aria-expanded='false'
+                className='btn btn-warning dropdown-toggle'
+                data-bs-toggle='dropdown'
+                type='button'
+              >
+                Tipo: <strong>{selectedFilter.type}</strong>
+              </button>
+              <ul className='dropdown-menu'>
+                {types.map((type, i) => (
+                  <li key={i}>
+                    <span className='dropdown-item' onClick={() => handleFilterSelection(type, 'type')}>
+                      {
+                        <>
+                          {selectedFilter.type === type.value && (
+                            <i className='bi bi-check-circle-fill me-2 text-warning' />
+                          )}
+                          {selectedFilter.type !== type.value && (
+                            <i className='bi bi-circle-fill me-2 text-secondary' />
+                          )}
+                        </>
+                      }
+                      {type.name}
                     </span>
                   </li>
                 ))}

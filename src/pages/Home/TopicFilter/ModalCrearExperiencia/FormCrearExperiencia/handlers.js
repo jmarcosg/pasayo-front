@@ -26,6 +26,11 @@ export const temasExperiencias = [
   { name: 'REPETITIVAS', value: 'REPETITIVAS' },
 ];
 
+export const tiposExperiencias = [
+  { name: 'TEXTO', value: 'TEXTO' },
+  { name: 'BLOQUES', value: 'BLOQUES' },
+];
+
 export const removeInvalidClasses = (field) => {
   const remInvalid = removeIsInvalidClass;
 
@@ -35,6 +40,7 @@ export const removeInvalidClasses = (field) => {
   if (field === 'solucion') remInvalid(['#label-solucion', '#solucion']);
   if (field === 'objetivo') remInvalid(['#label-objetivo', '#objetivo']);
   if (field === 'tema') remInvalid(['#label-tema', '#tema']);
+  if (field === 'tipo') remInvalid(['#label-tipo', '#tipo']);
 };
 
 export const removeValidClasses = (field) => {
@@ -46,6 +52,7 @@ export const removeValidClasses = (field) => {
   if (field === 'solucion') remValid(['#label-solucion', '#solucion']);
   if (field === 'objetivo') remValid(['#label-objetivo', '#objetivo']);
   if (field === 'tema') remValid(['#label-tema', '#tema']);
+  if (field === 'tipo') remValid(['#label-tipo', '#tipo']);
 };
 
 /** deshabilita el envio de informacion y muestra los errores */
@@ -100,6 +107,14 @@ export const validateData = (experienciaBody) => {
     validData = false;
   } else {
     addIsValidClass(['#label-tema', '#tema']);
+  }
+
+  if (experienciaBody.tipo === '') {
+    addIsInvalidClass(['#label-tipo', '#tipo']);
+    messages.push('Debe seleccionar un tipo');
+    validData = false;
+  } else {
+    addIsValidClass(['#label-tipo', '#tipo']);
   }
 
   /* Mostramos los mensajes */

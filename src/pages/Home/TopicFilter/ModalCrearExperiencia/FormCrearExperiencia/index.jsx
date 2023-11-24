@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getTiposTrayectos, handlerSendData, temasExperiencias, validateData } from './handlers';
+import { getTiposTrayectos, handlerSendData, temasExperiencias, tiposExperiencias, validateData } from './handlers';
 import { getSession } from '../../../../../utils/auth';
 
 const FormCrearExperiencia = (props) => {
@@ -18,6 +18,7 @@ const FormCrearExperiencia = (props) => {
       objetivo: '',
       solucion: '',
       tema: '',
+      tipo: '',
       user: username,
     },
     sent: false,
@@ -141,6 +142,35 @@ const FormCrearExperiencia = (props) => {
             </div>
             <div className='form-text'>
               La narrativa es el marco de sentido para la experiencia. Tratá de que sea lo más clara y concisa posible.
+            </div>
+          </div>
+        </div>
+
+        <div className='row mt-2'>
+          <div className='mb-2'>
+            <label className='form-label fw-bold' htmlFor='tipo' id='label-tipo'>
+              Tipo
+            </label>
+            <div className='form-floating'>
+              <select
+                aria-label='Select tipo experiencia'
+                className='form-select'
+                defaultValue={'default'}
+                disabled={experiencia.loading}
+                id='tipo'
+                name='tipo'
+                onChange={handleBodyChange}
+              >
+                <option disabled value={'default'} />
+                {tiposExperiencias.map((tipo) => (
+                  <option key={tipo.value} value={tipo.value}>
+                    {tipo.name}
+                  </option>
+                ))}
+              </select>
+              <label className='form-label fw-bold' htmlFor='tipo' id='label-tipo'>
+                Indicá el tipo de tu experiencia
+              </label>
             </div>
           </div>
         </div>
