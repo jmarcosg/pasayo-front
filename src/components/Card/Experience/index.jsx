@@ -49,8 +49,10 @@ const ExperiencieCard = ({ data, room }) => {
         </span>
 
         <span className='badge text-bg-success d-flex gap-1'>
-          <i className='bi bi-code-slash' />
-          TEXTO
+          {data?.tipo === 'BLOQUES' && <i className='bi bi-puzzle-fill' />}
+
+          {data?.tipo === 'TEXTO' && <i className='bi bi-code-slash' />}
+          {data?.tipo}
         </span>
 
         <span className='badge text-bg-danger d-flex gap-1'>
