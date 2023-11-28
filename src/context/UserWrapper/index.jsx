@@ -48,9 +48,9 @@ export const UserWrapper = ({ children }) => {
     try {
       const res = await login(user);
 
-      Cookies.set('token', res.data.token);
-      setUser(res.data);
-      setSession(res.data);
+      Cookies.set('token', res.token);
+      setUser(res);
+      setSession(res);
       setIsAuthenticated(true);
     } catch (error) {
       console.log(error);
@@ -66,7 +66,7 @@ export const UserWrapper = ({ children }) => {
   };
 
   useEffect(() => {
-    const checkLogin = async () => {
+    const checkLogin = async (token) => {
       const cookies = Cookies.get();
 
       if (!cookies.token) {
@@ -77,12 +77,12 @@ export const UserWrapper = ({ children }) => {
       }
 
       try {
-        const res = await verifyToken(cookies.token);
+        const res = await verifyToken(token);
 
-        if (!res.data) return setIsAuthenticated(false);
+        if (!res) return setIsAuthenticated(false);
 
         setIsAuthenticated(true);
-        setUser(res.data);
+        setUser(res);
         setLoading(false);
       } catch (error) {
         setIsAuthenticated(false);
