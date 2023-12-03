@@ -20,11 +20,17 @@ const TextEditor = ({ code, setCode, saveSession, isSession, shareSessionLink })
       toast.success('Código ejecutado correctamente');
       setCode({ ...code, compiled: true });
     } catch (exception) {
+      let errorMessages = [];
+
       if (exception instanceof ReferenceError) {
-        toast.error('No se puede ejecutar código con variables indefinidas');
-      } else if (exception instanceof SyntaxError) {
-        toast.error('No se puede ejecutar código con errores de sintaxis');
+        errorMessages.push('No se puede ejecutar código con variables indefinidas');
       }
+
+      if (exception instanceof SyntaxError) {
+        errorMessages.push('No se puede ejecutar código con errores de sintaxis');
+      }
+
+      errorMessages.forEach((errroMessage) => toast.error(errroMessage));
     }
   };
 
