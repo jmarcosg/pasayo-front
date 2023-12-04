@@ -26,13 +26,23 @@ const ExperiencieCard = ({ data, room }) => {
 
       <div className='d-grid gap-3'>
         <div aria-label='Acciones Experiencia' className='btn-group' role='group'>
-          <Link className='btn btn-warning rounded-0' to={`/texto/${data._id}`}>
-            <i className='bi bi-eye-fill' />
-          </Link>
+          {data?.tipo === 'TEXTO' && (
+            <>
+              <Link className='btn btn-warning rounded-0' to={`/texto/${data._id}`}>
+                <i className='bi bi-eye-fill' />
+              </Link>
 
-          <Link className='btn btn-warning rounded-0' to={`/texto/${data._id}/usuario/${username}/sala/${room}`}>
-            <i className='bi bi-play-fill' />
-          </Link>
+              <Link className='btn btn-warning rounded-0' to={`/texto/${data._id}/usuario/${username}/sala/${room}`}>
+                <i className='bi bi-play-fill' />
+              </Link>
+            </>
+          )}
+
+          {data?.tipo === 'BLOQUES' && (
+            <Link className='btn btn-warning rounded-0' to={`/bloques/${data._id}`}>
+              <i className='bi bi-play-fill' />
+            </Link>
+          )}
 
           {data?.user === username && (
             <button className='btn btn-danger rounded-0' type='button' onClick={toggleModalBorrar}>
@@ -45,7 +55,7 @@ const ExperiencieCard = ({ data, room }) => {
       <div className='card-body text-bg-light d-flex flex-wrap justify-content-center gap-2'>
         <span className='badge text-bg-secondary d-flex gap-1'>
           <i className='bi bi-signpost-fill' />
-          {data?.trayecto[0]?.tema}
+          {data?.trayecto[0]?.tema.toUpperCase()}
         </span>
 
         <span className='badge text-bg-success d-flex gap-1'>
