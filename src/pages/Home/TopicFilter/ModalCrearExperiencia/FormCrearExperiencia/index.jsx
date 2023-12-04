@@ -183,7 +183,7 @@ const FormCrearExperiencia = (props) => {
             <div className='form-floating'>
               <textarea
                 className='form-control'
-                disabled={experiencia.loading}
+                disabled={experiencia.loading || experiencia.body.tipo !== 'TEXTO'}
                 id='solucion'
                 name='solucion'
                 placeholder='Ingresá una plantilla para esta experiencia'

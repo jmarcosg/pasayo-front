@@ -85,7 +85,7 @@ export const validateData = (experienciaBody) => {
     addIsValidClass(['#label-narrativa', '#narrativa']);
   }
 
-  if (experienciaBody.solucion === '') {
+  if (experienciaBody.tema === 'TEXTO' && experienciaBody.solucion === '') {
     addIsInvalidClass(['#label-solucion', '#solucion']);
     messages.push('Debe ingresar una solución');
     validData = false;
