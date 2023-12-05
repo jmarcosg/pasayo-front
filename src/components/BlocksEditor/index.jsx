@@ -7,19 +7,30 @@ import { toolModularidad, toolRepetitivas, toolSecuencia, toolAlternativaSimple 
 const BlocksEditor = ({ code, setCode, saveSession, isSession, type }) => {
   const [xml, setXml] = useState(code.body);
   const [javascriptCode, setJavascriptCode] = useState('');
-  let toolbox;
 
   const workspaceDidChange = (workspace) => {
-    const code = Blockly.JavaScript.workspaceToCode(workspace);
+    const code = Blockly.JavaScript?.workspaceToCode(workspace);
 
     setJavascriptCode(code);
   };
 
-  useEffect(() => {
+  let toolboxCategories = null;
+
+  const getToolbox = () => {
+    let toolbox;
+
     if (type === 'secuencias') toolbox = toolSecuencia;
     else if (type === 'alternativa') toolbox = toolAlternativaSimple;
     else if (type === 'repetitiva') toolbox = toolRepetitivas;
     else if (type === 'MODULARIDAD') toolbox = toolModularidad;
+
+    console.log(toolbox);
+
+    return toolbox;
+  };
+
+  useEffect(() => {
+    toolboxCategories = getToolbox(type);
   }, []);
 
   return (
@@ -27,7 +38,7 @@ const BlocksEditor = ({ code, setCode, saveSession, isSession, type }) => {
       <BlocklyWorkspace
         className='fill-height'
         initialXml={xml}
-        toolboxConfiguration={toolbox}
+        toolboxConfiguration={toolboxCategories}
         workspaceConfiguration={{
           grid: {
             spacing: 20,
@@ -36,7 +47,7 @@ const BlocksEditor = ({ code, setCode, saveSession, isSession, type }) => {
             snap: true,
           },
         }}
-        onWorkspaceChange={() => workspaceDidChange}
+        onWorkspaceChange={workspaceDidChange}
         onXmlChange={setXml}
       />
     </>

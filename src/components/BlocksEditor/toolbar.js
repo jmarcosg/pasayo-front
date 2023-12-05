@@ -34,7 +34,6 @@ export const toolSecuencia = {
         },
       ],
     },
-
     {
       kind: 'category',
       name: 'Numeros',
@@ -50,7 +49,6 @@ export const toolSecuencia = {
         },
       ],
     },
-
     {
       kind: 'category',
       name: 'Variable',
@@ -137,7 +135,6 @@ export const toolAlternativaSimple = {
         },
       ],
     },
-
     {
       kind: 'category',
       name: 'Numeros',
@@ -153,7 +150,6 @@ export const toolAlternativaSimple = {
         },
       ],
     },
-
     {
       kind: 'category',
       name: 'Variable',
@@ -201,7 +197,6 @@ export const toolAlternativaSimple = {
         },
       ],
     },
-
     {
       kind: 'category',
       name: 'Control',
@@ -232,7 +227,6 @@ export const toolAlternativaSimple = {
         },
       ],
     },
-
     {
       kind: 'category',
       name: 'Numeros',
@@ -288,7 +282,6 @@ export const toolModularidad = {
         },
       ],
     },
-
     {
       kind: 'category',
       name: 'Numeros',
@@ -378,7 +371,6 @@ export const toolModularidad = {
         },
       ],
     },
-
     {
       kind: 'category',
       name: 'Control',
@@ -409,7 +401,6 @@ export const toolModularidad = {
         },
       ],
     },
-
     {
       kind: 'category',
       name: 'Numeros',
@@ -425,7 +416,6 @@ export const toolModularidad = {
         },
       ],
     },
-
     {
       kind: 'category',
       colour: '#AF7AC5',
@@ -471,7 +461,6 @@ export const toolRepetitivas = {
         },
       ],
     },
-
     {
       kind: 'category',
       name: 'Numeros',
@@ -561,7 +550,6 @@ export const toolRepetitivas = {
         },
       ],
     },
-
     {
       kind: 'category',
       name: 'Control',
@@ -592,7 +580,6 @@ export const toolRepetitivas = {
         },
       ],
     },
-
     {
       kind: 'category',
       name: 'Numeros',
@@ -610,17 +597,3 @@ export const toolRepetitivas = {
     },
   ],
 };
-
-toolbar[1] = toolSecuencia;
-toolbar[2] = toolSecuencia;
-toolbar[3] = toolAlternativaSimple;
-toolbar[4] = toolAlternativaSimple;
-toolbar[5] = toolSecuencia;
-toolbar[6] = toolAlternativaSimple;
-toolbar[7] = toolAlternativaSimple;
-toolbar[8] = toolAlternativaSimple;
-toolbar[9] = toolAlternativaSimple;
-toolbar[10] = toolModularidad;
-toolbar[11] = toolModularidad;
-toolbar[12] = toolModularidad;
-toolbar[13] = toolModularidad;
