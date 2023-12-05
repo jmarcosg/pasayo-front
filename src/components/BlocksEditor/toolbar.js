@@ -1,3 +1,5 @@
+export const toolbar = [];
+
 export const toolSecuencia = {
   kind: 'categoryToolbox',
   contents: [
@@ -23,7 +25,6 @@ export const toolSecuencia = {
           tooltip: '%{BKY_TEXT_TEXT_TOOLTIP}',
           extensions: ['text_quotes', 'parent_tooltip_when_inline'],
         },
-
         {
           kind: 'block',
           type: 'text_print',
@@ -124,7 +125,6 @@ export const toolAlternativaSimple = {
           tooltip: '%{BKY_TEXT_TEXT_TOOLTIP}',
           extensions: ['text_quotes', 'parent_tooltip_when_inline'],
         },
-
         {
           kind: 'block',
           type: 'text_print',
@@ -275,7 +275,6 @@ export const toolModularidad = {
           kind: 'block',
           type: 'text_print',
         },
-
         {
           type: 'text_prompt',
           kind: 'block',
@@ -450,7 +449,6 @@ export const toolRepetitivas = {
           tooltip: '%{BKY_TEXT_TEXT_TOOLTIP}',
           extensions: ['text_quotes', 'parent_tooltip_when_inline'],
         },
-
         {
           kind: 'block',
           type: 'text_print',
@@ -597,3 +595,17 @@ export const toolRepetitivas = {
     },
   ],
 };
+
+toolbar[1] = toolSecuencia;
+toolbar[2] = toolSecuencia;
+toolbar[3] = toolAlternativaSimple;
+toolbar[4] = toolAlternativaSimple;
+toolbar[5] = toolSecuencia;
+toolbar[6] = toolAlternativaSimple;
+toolbar[7] = toolAlternativaSimple;
+toolbar[8] = toolAlternativaSimple;
+toolbar[9] = toolAlternativaSimple;
+toolbar[10] = toolModularidad;
+toolbar[11] = toolModularidad;
+toolbar[12] = toolModularidad;
+toolbar[13] = toolModularidad;

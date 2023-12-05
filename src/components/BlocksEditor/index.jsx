@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { BlocklyWorkspace } from 'react-blockly';
 import Blockly from 'blockly';
 import './styles.css';
-import { toolModularidad, toolRepetitivas, toolSecuencia, toolAlternativaSimple } from './toolbar';
+import { toolbar, toolModularidad, toolRepetitivas, toolSecuencia, toolAlternativaSimple } from './toolbar';
 
 const BlocksEditor = ({ code, setCode, saveSession, isSession, type }) => {
   const [xml, setXml] = useState(code.body);
@@ -14,24 +14,19 @@ const BlocksEditor = ({ code, setCode, saveSession, isSession, type }) => {
     setJavascriptCode(code);
   };
 
-  let toolboxCategories = null;
+  const toolboxCategories = codigo();
+  //console.log(laExp.experiencia)
 
-  const getToolbox = () => {
-    let toolbox;
+  function codigo() {
+    let toolbox = 0;
 
     if (type === 'secuencias') toolbox = toolSecuencia;
     else if (type === 'alternativa') toolbox = toolAlternativaSimple;
     else if (type === 'repetitiva') toolbox = toolRepetitivas;
     else if (type === 'MODULARIDAD') toolbox = toolModularidad;
 
-    console.log(toolbox);
-
     return toolbox;
-  };
-
-  useEffect(() => {
-    toolboxCategories = getToolbox(type);
-  }, []);
+  }
 
   return (
     <>
