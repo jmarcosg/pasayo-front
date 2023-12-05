@@ -56,11 +56,15 @@ const BlocksCodingSession = () => {
                 </li>
               </ul>
             </div>
-
-            <BlocksEditor code={code} setCode={setCode} type={experiencia.data?.tema} />
           </>
         )}
       </div>
+
+      {!experiencia?.loading && experiencia?.data && (
+        <div className='container-fluid'>
+          <BlocksEditor code={code} setCode={setCode} type={experiencia.data?.tema} />
+        </div>
+      )}
     </>
   );
 };
