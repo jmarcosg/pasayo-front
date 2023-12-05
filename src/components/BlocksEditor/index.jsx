@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BlocklyWorkspace } from 'react-blockly';
 import Blockly from 'blockly';
 import './styles.css';
-import { toolbar, toolModularidad, toolRepetitivas, toolSecuencia, toolAlternativaSimple } from './toolbar';
+import { toolModularidad, toolRepetitivas, toolSecuencia, toolAlternativaSimple } from './toolbar';
 
 const BlocksEditor = ({ code, setCode, saveSession, isSession, type }) => {
   const [xml, setXml] = useState(code.body);
