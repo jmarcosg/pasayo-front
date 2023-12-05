@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { createSession, getExperiencia, saveCode } from './handlers';
 import { BlocksEditor } from '../../components';
-import { getExperiencia } from './handlers';
+import { getSession } from '../../utils/auth';
 
 const BlocksCodingSession = () => {
   let { id } = useParams();
+  const { username } = getSession();
+
   const [experiencia, setExperiencia] = useState({
     data: null,
     loading: false,
@@ -18,9 +21,25 @@ const BlocksCodingSession = () => {
     sending: false,
   });
 
+  const [session, setSession] = useState({
+    data: null,
+    loading: false,
+    error: null,
+  });
+
+  const saveSession = async () => {
+    saveCode(session, setSession, code);
+  };
+
   useEffect(() => {
-    getExperiencia(experiencia, setExperiencia, code, setCode, id);
+    createSession(session, setSession, id, username);
   }, []);
+
+  useEffect(() => {
+    if (session.data) {
+      getExperiencia(experiencia, setExperiencia, code, setCode, id);
+    }
+  }, [session]);
 
   return (
     <>
@@ -62,7 +81,7 @@ const BlocksCodingSession = () => {
 
       {!experiencia?.loading && experiencia?.data && (
         <div className='container-fluid'>
-          <BlocksEditor code={code} setCode={setCode} type={experiencia.data?.tema} />
+          <BlocksEditor code={code} saveSession={saveSession} setCode={setCode} type={experiencia.data?.tema} />
         </div>
       )}
     </>
