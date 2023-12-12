@@ -39,7 +39,7 @@ const TextEditor = ({ code, setCode, saveSession, isSession, shareSessionLink })
       <Editor
         defaultValue={!isSession ? code.body : ''}
         height='42vh'
-        language={'javascript'}
+        language={'typescript'}
         loading={'Cargando...'}
         options={options}
         theme={'vs-dark'}
