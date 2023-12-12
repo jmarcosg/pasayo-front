@@ -81,7 +81,13 @@ const BlocksCodingSession = () => {
 
       {!experiencia?.loading && experiencia?.data && (
         <div className='container-fluid'>
-          <BlocksEditor code={code} saveSession={saveSession} setCode={setCode} type={experiencia.data?.tema} />
+          <BlocksEditor
+            code={code}
+            saveSession={saveSession}
+            session={session.data}
+            setCode={setCode}
+            type={experiencia.data?.tema}
+          />
         </div>
       )}
     </>

@@ -1,19 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BlocklyWorkspace } from 'react-blockly';
-import Blockly from 'blockly/core';
 import { javascriptGenerator } from 'blockly/javascript';
 import { toast } from 'react-hot-toast';
 import Tooltip from '../Tooltip';
 import './styles.css';
 import { toolModularidad, toolRepetitivas, toolSecuencia, toolAlternativaSimple } from './toolbar';
 
-const BlocksEditor = ({ code, setCode, saveSession, isSession, type }) => {
-  const [xml, setXml] = useState(code.body);
+const BlocksEditor = ({ code, setCode, session, saveSession, type }) => {
+  const [xml, setXml] = useState(session.codigo);
   const [javascriptCode, setJavascriptCode] = useState('');
 
   function workspaceDidChange(workspace) {
-    // TODO: fix this workspaceToCode is not a function
-    const code = Blockly.JavaScript?.workspaceToCode(workspace);
+    const code = javascriptGenerator.workspaceToCode(workspace);
 
     setJavascriptCode(code);
   }
@@ -30,6 +28,10 @@ const BlocksEditor = ({ code, setCode, saveSession, isSession, type }) => {
 
     return toolbox;
   }
+
+  useEffect(() => {
+    setCode({ ...code, body: xml, compiled: false });
+  }, [javascriptCode]);
 
   const handleRunCode = () => {
     if (!code.body) return;
