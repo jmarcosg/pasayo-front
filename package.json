@@ -5,22 +5,32 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "build": "npm run lint:fix && npm run format && vite build",
+    "test": "jest --watchAll",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx,json}\" ",
+    "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx,json}\" ",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,md,json,scss}\" --config ./.prettierrc"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.1",
+    "@monaco-editor/react": "^4.6.0",
     "axios": "^1.5.0",
+    "blockly": "^10.2.2",
     "bootstrap": "^5.3.1",
     "bootstrap-icons": "^1.11.1",
+    "copy-to-clipboard": "^3.3.3",
     "js-cookie": "^3.0.5",
+    "monaco-themes": "^0.4.4",
     "react": "^18.2.0",
+    "react-blockly": "^8.1.0",
     "react-bootstrap": "^2.8.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.46.2",
+    "react-hot-toast": "^2.4.1",
+    "react-responsive-masonry": "^2.1.7",
     "react-router-dom": "^6.16.0",
     "react-select": "^5.7.4",
+    "socket.io-client": "^4.7.2",
     "zod": "^3.22.2"
   },
   "devDependencies": {
