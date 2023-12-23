@@ -1,48 +1,49 @@
 import { Link } from 'react-router-dom';
-import pasayoLogo from '../../assets/img/PASAYOTEXTO_white.png';
+import pasayoLogo from '../../assets/img/pasayo_color.png';
 import { useUserAuth } from '../../context';
 
 const Navbar = ({ userData }) => {
   const { logout } = useUserAuth();
 
   return (
-    <nav className='navbar navbar-expand-lg bg-warning'>
-      <div className='container-fluid d-flex justify-content-between'>
-        <div className='navbar-brand'>
-          <img
-            alt='Logo'
-            className='d-inline-block align-text-top user-select-none'
-            src={pasayoLogo}
-            style={{ maxHeight: '10%', maxWidth: '10%' }}
-          />
+    <header className='navbar navbar-expand-lg bg-body-secondary'>
+      <nav className='container-xxl flex-wrap flex-lg-nowrap align-items-center'>
+        <div className='d-flex align-items-center gap-sm-2'>
+          <Link
+            className='navbar-brand p-0 me-0 me-lg-2 d-flex gap-2 align-items-center text-uppercase fw-semibold'
+            to={'/'}
+          >
+            <img
+              alt='Logo'
+              className='d-inline-block align-text-top user-select-none'
+              src={pasayoLogo}
+              style={{ maxHeight: '8%', maxWidth: '8%' }}
+            />
+            Pasayo
+          </Link>
         </div>
+
         {userData && (
-          <>
-            <button
-              aria-controls='navbarSupportedContent'
-              aria-expanded='false'
-              aria-label='Toggle navigation'
-              className='navbar-toggler'
-              data-bs-target='#navbarSupportedContent'
-              data-bs-toggle='collapse'
-              type='button'
-            >
-              <span className='navbar-toggler-icon' />
-            </button>
-            <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-              <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
-                <li className='nav-item'>
-                  <Link className='btn btn-danger text-nowrap' role='button' to={'/login'} onClick={logout}>
-                    <i className='bi bi-person-circle me-2' />
-                    {userData?.username}
-                  </Link>
-                </li>
-              </ul>
+          <div className='d-flex gap-2 align-items-center'>
+            <div className='d-none d-sm-block text-start'>
+              <small className='fw-bold'>{userData?.username}</small>
             </div>
-          </>
+
+            <div className='vr d-none d-sm-block' />
+
+            <Link
+              className='d-flex gap-2 text-uppercase badge bg-danger text-wrap text-decoration-none'
+              role='button'
+              to={'/login'}
+              onClick={logout}
+            >
+              <i className='bi bi-box-arrow-left' />
+              Salir
+            </Link>
+          </div>
         )}
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 };
 
