@@ -41,12 +41,12 @@ const Login = ({ setSelectedAuth }) => {
           {...register('password', { required: true, minLength: 6 })}
         />
         <div className='d-flex justify-content-center mt-3'>
-          <button className='btn btn-warning w-100' type='submit'>
+          <button className='btn btn-success w-100' type='submit'>
             <i className='bi bi-box-arrow-in-right' /> Entrar
           </button>
         </div>
         <div className='d-flex justify-content-center mt-3'>
-          <a className='btn btn-warning w-100' role='button' onClick={() => setSelectedAuth('register')}>
+          <a className='btn btn-secondary w-100' role='button' onClick={() => setSelectedAuth('register')}>
             <i className='bi bi-person-fill-add' /> No tengo cuenta
           </a>
         </div>

@@ -52,12 +52,12 @@ const Register = ({ setSelectedAuth }) => {
         <p>{errors.password?.message}</p>
 
         <div className='d-flex justify-content-center mt-3'>
-          <button className='btn btn-warning w-100' type='submit'>
+          <button className='btn btn-success w-100' type='submit'>
             <i className='bi bi-person-fill-add' /> Crear Cuenta
           </button>
         </div>
         <div className='d-flex justify-content-center mt-3'>
-          <a className='btn btn-warning w-100' role='button' onClick={() => setSelectedAuth('login')}>
+          <a className='btn btn-secondary w-100' role='button' onClick={() => setSelectedAuth('login')}>
             <i className='bi bi-box-arrow-in-right' /> Ya tengo cuenta, ingresar
           </a>
         </div>
