@@ -57,7 +57,7 @@ const Register = ({ setSelectedAuth }) => {
           </button>
         </div>
         <div className='d-flex justify-content-center mt-3'>
-          <a className='btn btn-secondary w-100' role='button' onClick={() => setSelectedAuth('login')}>
+          <a className='btn btn-violet w-100' role='button' onClick={() => setSelectedAuth('login')}>
             <i className='bi bi-box-arrow-in-right' /> Ya tengo cuenta, ingresar
           </a>
         </div>

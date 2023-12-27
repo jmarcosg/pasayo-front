@@ -22,14 +22,14 @@ const ModalCrearExperiencia = ({ experiences, getExperiencias, setExperiences, s
       <div className='row d-flex justify-content-center'>
         <div aria-label='Basic example' className='btn-group' role='group'>
           <button
-            className={`btn btn-outline-warning ${selectedForm === 'experiencia' && 'active'}`}
+            className={`btn btn-outline-violet ${selectedForm === 'experiencia' && 'active'}`}
             type='button'
             onClick={() => handleFormSelection('experiencia')}
           >
             Crear Experiencia
           </button>
           <button
-            className={`btn btn-outline-warning ${selectedForm === 'trayecto' && 'active'}`}
+            className={`btn btn-outline-violet ${selectedForm === 'trayecto' && 'active'}`}
             type='button'
             onClick={() => handleFormSelection('trayecto')}
           >

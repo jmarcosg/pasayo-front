@@ -60,14 +60,14 @@ const BlocksEditor = ({ code, setCode, session, saveSession, type }) => {
       <div className='d-flex gap-2 justify-content-center'>
         <div aria-label='Botonera' className='btn-group mt-2' role='group'>
           <Tooltip position='bottom' tooltipText='Ejecutar código'>
-            <button className={`btn ${xml ? 'btn-warning' : 'btn-outline-warning'}`} onClick={handleRunCode}>
+            <button className={`btn ${xml ? 'btn-violet' : 'btn-outline-violet'}`} onClick={handleRunCode}>
               <i className='bi bi-play-fill' />
             </button>
           </Tooltip>
 
           <Tooltip position='bottom' tooltipText='Guardar como solución'>
             <button
-              className={`btn ${code.compiled ? 'btn-warning' : 'btn-outline-warning'}`}
+              className={`btn ${code.compiled ? 'btn-violet' : 'btn-outline-violet'}`}
               disabled={!code.compiled}
               type='button'
               onClick={saveSession}

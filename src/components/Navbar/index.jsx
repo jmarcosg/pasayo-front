@@ -6,7 +6,7 @@ const Navbar = ({ userData }) => {
   const { logout } = useUserAuth();
 
   return (
-    <header className='navbar navbar-expand-lg bg-body-secondary'>
+    <header className={`navbar navbar-expand-lg bg-body-tertiary ${!userData && 'shadow'}`}>
       <nav className='container-xxl flex-wrap flex-lg-nowrap align-items-center'>
         <div className='d-flex align-items-center gap-sm-2'>
           <Link

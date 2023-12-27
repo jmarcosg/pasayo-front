@@ -266,7 +266,7 @@ const FormCrearExperiencia = (props) => {
             >
               Cancelar
             </button>
-            <button className='btn btn-warning' disabled={experiencia.loading} type='button' onClick={sendData}>
+            <button className='btn btn-violet' disabled={experiencia.loading} type='button' onClick={sendData}>
               Crear
             </button>
           </div>

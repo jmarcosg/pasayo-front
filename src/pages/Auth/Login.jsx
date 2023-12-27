@@ -46,7 +46,7 @@ const Login = ({ setSelectedAuth }) => {
           </button>
         </div>
         <div className='d-flex justify-content-center mt-3'>
-          <a className='btn btn-secondary w-100' role='button' onClick={() => setSelectedAuth('register')}>
+          <a className='btn btn-violet w-100' role='button' onClick={() => setSelectedAuth('register')}>
             <i className='bi bi-person-fill-add' /> No tengo cuenta
           </a>
         </div>
