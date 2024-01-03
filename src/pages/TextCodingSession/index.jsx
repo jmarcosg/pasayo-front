@@ -92,19 +92,19 @@ const TextCodingSession = () => {
   return (
     <>
       <div className='container'>
-        <Link className='btn btn-warning my-2' to={'/'} onClick={() => disconnectFromSession}>
-          <i className='fas fa-arrow-left' /> Volver al Inicio
+        <Link className='btn btn-violet my-2' to={'/'} onClick={() => disconnectFromSession}>
+          <i className='bi bi-arrow-left' /> Volver al Inicio
         </Link>
       </div>
 
       {session.loading && !session.data && (
-        <div className='spinner-grow text-warning' role='status'>
+        <div className='spinner-grow text-priamry' role='status'>
           <span className='visually-hidden'>Cargando...</span>
         </div>
       )}
 
       {experiencia.loading && !experiencia.data && (
-        <div className='spinner-grow text-warning' role='status'>
+        <div className='spinner-grow text-priamry' role='status'>
           <span className='visually-hidden'>Cargando...</span>
         </div>
       )}

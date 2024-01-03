@@ -16,11 +16,20 @@ const ExperiencieCard = ({ data, room }) => {
         <p className='card-text text-wrap fst-italic'>&quot;{data?.narrativa}&quot;</p>
       </div>
       <ul className='list-group list-group-flush'>
-        <li className='list-group-item'>
-          <span className='fw-bold'>Objetivo Didáctico:</span> {data?.objetivo}
+        <li className='list-group-item d-flex gap-2 text-secondary'>
+          <i className='bi bi-bullseye text-dark' />
+          {data?.objetivo}
         </li>
-        <li className='list-group-item'>
-          <span className='fw-bold'>Tema:</span> {data?.tema}
+        <li className='list-group-item d-flex gap-2'>
+          <span className='badge text-bg-secondary d-flex gap-1 rounded-pill user-select-none'>
+            <i className='bi bi-circle-fill' />
+            {data?.tema}
+          </span>
+
+          <span className='badge text-bg-secondary d-flex gap-1 rounded-pill user-select-none'>
+            <i className='bi bi-signpost-fill' />
+            {data?.trayecto[0]?.tema.toUpperCase()}
+          </span>
         </li>
       </ul>
 
@@ -28,18 +37,18 @@ const ExperiencieCard = ({ data, room }) => {
         <div aria-label='Acciones Experiencia' className='btn-group' role='group'>
           {data?.tipo === 'TEXTO' && (
             <>
-              <Link className='btn btn-warning rounded-0' to={`/texto/${data._id}`}>
+              <Link className='btn btn-violet rounded-0' to={`/texto/${data._id}`}>
                 <i className='bi bi-eye-fill' />
               </Link>
 
-              <Link className='btn btn-warning rounded-0' to={`/texto/${data._id}/usuario/${username}/sala/${room}`}>
+              <Link className='btn btn-violet rounded-0' to={`/texto/${data._id}/usuario/${username}/sala/${room}`}>
                 <i className='bi bi-play-fill' />
               </Link>
             </>
           )}
 
           {data?.tipo === 'BLOQUES' && (
-            <Link className='btn btn-warning rounded-0' to={`/bloques/${data._id}`}>
+            <Link className='btn btn-violet rounded-0' to={`/bloques/${data._id}`}>
               <i className='bi bi-play-fill' />
             </Link>
           )}
@@ -52,20 +61,15 @@ const ExperiencieCard = ({ data, room }) => {
         </div>
       </div>
 
-      <div className='card-body text-bg-light d-flex flex-wrap justify-content-center gap-2'>
-        <span className='badge text-bg-secondary d-flex gap-1'>
-          <i className='bi bi-signpost-fill' />
-          {data?.trayecto[0]?.tema.toUpperCase()}
-        </span>
-
-        <span className='badge text-bg-success d-flex gap-1'>
+      <div className='card-body text-bg-light d-flex flex-wrap justify-content-end gap-2'>
+        <span className='badge text-bg-dark d-flex gap-1 rounded-pill user-select-none'>
           {data?.tipo === 'BLOQUES' && <i className='bi bi-puzzle-fill' />}
 
           {data?.tipo === 'TEXTO' && <i className='bi bi-code-slash' />}
           {data?.tipo}
         </span>
 
-        <span className='badge text-bg-danger d-flex gap-1'>
+        <span className='badge text-bg-dark d-flex gap-1 rounded-pill user-select-none'>
           <i className='bi bi-person-fill' />
           {data?.user}
         </span>

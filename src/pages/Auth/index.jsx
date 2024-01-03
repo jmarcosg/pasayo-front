@@ -19,12 +19,18 @@ const Auth = () => {
     <>
       <div className='d-flex justify-content-center mt-5'>
         <div className='card' style={{ width: '22rem' }}>
-          <img alt='Banner Pasayo' className='card-img-top' src='https://i.stack.imgur.com/y9DpT.jpg' />
           <div className='card-body'>
             {selectedAuth === 'login' && <Login setSelectedAuth={setSelectedAuth} />}
             {selectedAuth === 'register' && <Register setSelectedAuth={setSelectedAuth} />}
           </div>
         </div>
+      </div>
+
+      <div className='container alert alert-info mt-2' role='alert' style={{ width: '22rem' }}>
+        <p className='mb-0'>
+          <span className='fw-bold'>PASAYO</span> es una plataforma comunitaria para aprender programación para niñas y
+          niños en el espectro autista.
+        </p>
       </div>
     </>
   );

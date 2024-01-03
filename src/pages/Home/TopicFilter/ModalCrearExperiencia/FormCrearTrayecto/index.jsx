@@ -143,7 +143,7 @@ const FormCrearTrayecto = ({ setModalTitle, toggleModal }) => {
             <button className='btn btn-danger me-2' disabled={trayecto.loading} type='button' onClick={toggleModal}>
               Cancelar
             </button>
-            <button className='btn btn-warning' disabled={trayecto.loading} type='button' onClick={sendData}>
+            <button className='btn btn-violet' disabled={trayecto.loading} type='button' onClick={sendData}>
               Crear
             </button>
           </div>

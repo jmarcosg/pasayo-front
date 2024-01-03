@@ -9,11 +9,11 @@ const App = () => {
       <Routes>
         <Route element={<Layout />}>
           <Route element={<Auth />} path='/login' />
+          <Route element={<Home />} path='/' />
+          <Route element={<BlocksCodingSession />} path='/bloques/:id' />
+          <Route element={<TextCoding />} path='/texto/:id' />
+          <Route element={<TextCodingSession />} path='/texto/:id/usuario/:user' />
           <Route element={<ProtectedRoutes />}>
-            <Route element={<Home />} path='/' />
-            <Route element={<BlocksCodingSession />} path='/bloques/:id' />
-            <Route element={<TextCoding />} path='/texto/:id' />
-            <Route element={<TextCodingSession />} path='/texto/:id/usuario/:user' />
             <Route element={<TextCodingSession />} path='/texto/:id/usuario/:user/sala/:room' />
           </Route>
         </Route>

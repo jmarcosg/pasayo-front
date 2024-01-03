@@ -30,20 +30,8 @@ const TopicFilter = ({ experiences, getExperiencias, setExperiences }) => {
   const toggleModalSolicitar = () => setShowModalCrearExperiencia(!showModalCrearExperiencia);
 
   return (
-    <nav className='navbar navbar-expand-lg bg-body-tertiary'>
+    <nav className='navbar navbar-expand-lg bg-body-tertiary shadow'>
       <div className='container-fluid'>
-        {/* <button
-          aria-controls='navbarSupportedContent'
-          aria-expanded='false'
-          aria-label='Toggle navigation'
-          className='navbar-toggler'
-          data-bs-target='#navbarSupportedContent'
-          data-bs-toggle='collapse'
-          type='button'
-        >
-          <span className='navbar-toggler-icon' />
-        </button> */}
-
         <div className='collapse navbar-collapse d-flex gap-2 justify-content-center' id='navbarSupportedContent'>
           <form className='d-flex gap-2'>
             <input
@@ -51,7 +39,7 @@ const TopicFilter = ({ experiences, getExperiencias, setExperiences }) => {
               className='form-control ms-2'
               placeholder='Título'
               type='search'
-              value={selectedFilter.title}
+              value={selectedFilter.title.toUpperCase()}
               onChange={(e) => handleFilterSelection(e.target, 'title')}
             />
           </form>
@@ -60,7 +48,7 @@ const TopicFilter = ({ experiences, getExperiencias, setExperiences }) => {
             <div className='btn-group' role='group'>
               <button
                 aria-expanded='false'
-                className='btn btn-warning dropdown-toggle'
+                className='btn btn-sm btn-primary dropdown-toggle'
                 data-bs-toggle='dropdown'
                 type='button'
               >
@@ -73,7 +61,7 @@ const TopicFilter = ({ experiences, getExperiencias, setExperiences }) => {
                       {
                         <>
                           {selectedFilter.topic === topic.value && (
-                            <i className='bi bi-check-circle-fill me-2 text-warning' />
+                            <i className='bi bi-check-circle-fill me-2 text-primary' />
                           )}
                           {selectedFilter.topic !== topic.value && (
                             <i className='bi bi-circle-fill me-2 text-secondary' />
@@ -90,7 +78,7 @@ const TopicFilter = ({ experiences, getExperiencias, setExperiences }) => {
             <div className='btn-group' role='group'>
               <button
                 aria-expanded='false'
-                className='btn btn-warning dropdown-toggle'
+                className='btn btn-sm btn-primary dropdown-toggle'
                 data-bs-toggle='dropdown'
                 type='button'
               >
@@ -103,7 +91,7 @@ const TopicFilter = ({ experiences, getExperiencias, setExperiences }) => {
                       {
                         <>
                           {selectedFilter.author === author.value && (
-                            <i className='bi bi-check-circle-fill me-2 text-warning' />
+                            <i className='bi bi-check-circle-fill me-2 text-primary' />
                           )}
                           {selectedFilter.author !== author.value && (
                             <i className='bi bi-circle-fill me-2 text-secondary' />
@@ -120,7 +108,7 @@ const TopicFilter = ({ experiences, getExperiencias, setExperiences }) => {
             <div className='btn-group' role='group'>
               <button
                 aria-expanded='false'
-                className='btn btn-warning dropdown-toggle'
+                className='btn btn-sm btn-primary dropdown-toggle'
                 data-bs-toggle='dropdown'
                 type='button'
               >
@@ -133,7 +121,7 @@ const TopicFilter = ({ experiences, getExperiencias, setExperiences }) => {
                       {
                         <>
                           {selectedFilter.type === type.value && (
-                            <i className='bi bi-check-circle-fill me-2 text-warning' />
+                            <i className='bi bi-check-circle-fill me-2 text-primary' />
                           )}
                           {selectedFilter.type !== type.value && (
                             <i className='bi bi-circle-fill me-2 text-secondary' />
@@ -148,7 +136,7 @@ const TopicFilter = ({ experiences, getExperiencias, setExperiences }) => {
             </div>
 
             <button
-              className='btn btn-warning'
+              className='btn btn-sm btn-primary'
               onClick={() => getFilteredExperiencias(experiences, setExperiences, selectedFilter)}
             >
               <i className='bi bi-search' />
@@ -156,7 +144,7 @@ const TopicFilter = ({ experiences, getExperiencias, setExperiences }) => {
           </div>
 
           <button
-            className='btn btn-warning d-flex align-items-center gap-2 text-uppercase'
+            className='btn btn-sm btn-secondary d-flex align-items-center gap-2 text-uppercase'
             type='button'
             onClick={handleResetFilters}
           >
@@ -165,7 +153,7 @@ const TopicFilter = ({ experiences, getExperiencias, setExperiences }) => {
           </button>
 
           <button
-            className='btn btn-warning align-items-center d-flex gap-2 text-uppercase'
+            className='btn btn-sm btn-success align-items-center d-flex gap-2 text-uppercase'
             type='button'
             onClick={toggleModalSolicitar}
           >

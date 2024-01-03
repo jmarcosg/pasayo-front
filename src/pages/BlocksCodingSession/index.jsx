@@ -44,8 +44,8 @@ const BlocksCodingSession = () => {
   return (
     <>
       <div className='container'>
-        <Link className='btn btn-warning my-2' to={'/'}>
-          <i className='fas fa-arrow-left' /> Volver al Inicio
+        <Link className='btn btn-violet my-2 ' to={'/'}>
+          <i className='bi bi-arrow-left' /> Volver al Inicio
         </Link>
       </div>
 
