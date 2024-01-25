@@ -1,3 +1,4 @@
+import { mainMenu } from '@/components/layout/header/menu';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,7 +7,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { mainMenu } from '@/config/menu';
 import { cn } from '@/lib/utils';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 import { NavLink } from 'react-router-dom';

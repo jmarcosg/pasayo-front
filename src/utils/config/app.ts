@@ -11,10 +11,10 @@ interface AppConfig {
 }
 
 export const appConfig: AppConfig = {
-  name: 'Sample App',
+  name: 'Pasayo',
   github: {
-    title: 'React Shadcn Template',
-    url: 'https://github.com/jmarcosg/template-react-ts-shadcn',
+    title: 'Pasayo',
+    url: 'https://github.com/pasayo',
   },
   author: {
     name: 'jmarcosg',

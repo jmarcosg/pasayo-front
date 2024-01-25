@@ -1,8 +1,8 @@
+import { mainMenu } from '@/components/layout/header/menu';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { mainMenu } from '@/config/menu';
 import { cn } from '@/lib/utils';
 import { PanelLeft } from 'lucide-react';
 import { useState } from 'react';
