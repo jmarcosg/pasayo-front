@@ -20,8 +20,8 @@ const DEFAULT_HEADERS = {
 
 const useAxios = (
   endpoint: string,
-  requestMethod: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS' = 'GET',
-  options: IAxiosConfig
+  requestMethod: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS',
+  options?: IAxiosConfig
 ): IUseAxiosReturn => {
   const [data, setData] = useState<null>(null);
   const [error, setError] = useState<AxiosError | string | null>(null);
@@ -35,7 +35,7 @@ const useAxios = (
         method: requestMethod,
         headers: {
           ...DEFAULT_HEADERS,
-          ...options.headers,
+          ...options?.headers,
         },
         data: body,
         validateStatus: (status) => {
