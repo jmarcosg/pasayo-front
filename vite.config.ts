@@ -1,24 +1,38 @@
+/* eslint-disable no-undef */
 import react from '@vitejs/plugin-react';
-import path from 'path';
+import fs from 'fs/promises';
 import { defineConfig } from 'vite';
 
-const basenameProd = '/react-shadcn-starter';
-
-export default defineConfig(({ command }) => {
-  const isProd = command === 'build';
-
-  return {
-    base: isProd ? basenameProd : '',
-    plugins: [react()],
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, './src'),
+// https://vitejs.dev/config/
+export default defineConfig(() => ({
+  base: '/apps/vite-shadcn-starter/',
+  build: {
+    sourcemap: true,
+  },
+  plugins: [react()],
+  esbuild: {
+    loader: 'jsx',
+    include: /src\/.*\.jsx?$/,
+    // loader: "tsx",
+    // include: /src\/.*\.[tj]sx?$/,
+    exclude: [],
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      plugins: [
+        {
+          name: 'load-js-files-as-jsx',
+          setup(build) {
+            build.onLoad({ filter: /src\/.*\.js$/ }, async (args) => ({
+              loader: 'jsx',
+              contents: await fs.readFile(args.path, 'utf8'),
+            }));
+          },
+        },
+      ],
+      loader: {
+        '.js': 'jsx',
       },
     },
-    define: {
-      global: {
-        basename: isProd ? basenameProd : '',
-      },
-    },
-  };
-});
+  },
+}));
