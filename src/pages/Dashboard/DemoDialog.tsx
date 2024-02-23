@@ -12,10 +12,12 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from '@/components/ui/input';
 import { demoDialogFormSchema } from '@/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 const DemoDialog = () => {
+  const [validForm, setValidForm] = useState(false);
   const form = useForm<z.infer<typeof demoDialogFormSchema>>({
     resolver: zodResolver(demoDialogFormSchema),
     defaultValues: {
@@ -25,7 +27,12 @@ const DemoDialog = () => {
   });
 
   const onSubmit = (values: z.infer<typeof demoDialogFormSchema>) => {
-    console.log(values);
+    if (values) {
+      setValidForm(!validForm);
+      console.log(values);
+    } else {
+      setValidForm(false);
+    }
   };
 
   return (
@@ -43,7 +50,7 @@ const DemoDialog = () => {
           </DialogHeader>
 
           <Form {...form}>
-            <form className='grid gap-4 py-4' onSubmit={form.handleSubmit(onSubmit)}>
+            <form className='grid gap-4 pt-4' onSubmit={form.handleSubmit(onSubmit)}>
               <FormField
                 control={form.control}
                 name='name'
@@ -73,9 +80,10 @@ const DemoDialog = () => {
                   </FormItem>
                 )}
               />
-              <DialogFooter>
+              <DialogFooter className='pt-4'>
                 <Button type='submit'>Save changes</Button>
               </DialogFooter>
+              {validForm && <small className='text-center text-primary'>Form is valid. Check console</small>}
             </form>
           </Form>
         </DialogContent>
