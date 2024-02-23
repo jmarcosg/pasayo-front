@@ -1,4 +1,4 @@
-import { APP_NAME } from '../globals';
+import { APP_NAME } from '@/config';
 
 const KEY = window.location.origin + '/' + APP_NAME;
 

@@ -1,5 +1,5 @@
 import { Icons } from '@/components/icons';
-import { appConfig } from '@/utils/config/app';
+import { appConfig } from '@/config/app';
 import { NavLink } from 'react-router-dom';
 import { Logo } from '../../logo';
 import Actions from './actions';

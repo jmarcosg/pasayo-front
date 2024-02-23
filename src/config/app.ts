@@ -11,10 +11,10 @@ interface AppConfig {
 }
 
 export const appConfig: AppConfig = {
-  name: 'Pasayo',
+  name: 'Test',
   github: {
-    title: 'Pasayo',
-    url: 'https://github.com/pasayo',
+    title: 'jmarcosg',
+    url: 'https://github.com/jmarcosg',
   },
   author: {
     name: 'jmarcosg',

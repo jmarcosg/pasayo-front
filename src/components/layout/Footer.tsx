@@ -1,4 +1,4 @@
-import { appConfig } from '@/utils/config/app';
+import { appConfig } from '@/config/app';
 
 export function Footer() {
   return (
